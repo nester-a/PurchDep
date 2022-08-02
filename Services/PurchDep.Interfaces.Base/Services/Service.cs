@@ -5,9 +5,9 @@ namespace PurchDep.Interfaces.Base.Services
     public class Service<TSource, TResult, TKey> : IService<TResult, TKey>, IAsyncService<TResult, TKey> where TSource : class where TResult: class
     {
         Repository<TSource, TKey> _repository;
-        IMapperService<TSource, TResult> _mapper;
+        IMappingService<TSource, TResult> _mapper;
 
-        public Service(Repository<TSource, TKey> repository, IMapperService<TSource, TResult> mapper)
+        public Service(Repository<TSource, TKey> repository, IMappingService<TSource, TResult> mapper)
         {
             _repository = repository;
             _mapper = mapper;
