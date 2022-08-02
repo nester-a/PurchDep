@@ -47,6 +47,5 @@ namespace Services.PurchDep.Interfaces.Tests.Mapping
             Assert.Equal(TestData.Product2.Name, mapBack.Name);
             Assert.Equal(TestData.Product2.Price, mapBack.Price);
         }
-
     }
 }

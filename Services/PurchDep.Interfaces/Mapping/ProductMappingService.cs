@@ -37,7 +37,7 @@ namespace PurchDep.Interfaces.Mapping
 
         public async Task<Dal.Entities.Product> MapAsync(IProduct item, CancellationToken cancel = default)
         {
-            var productTask = Task.Factory.StartNew(() => Map(item), cancel);
+            Task<Dal.Entities.Product> productTask = Task.Factory.StartNew(() => Map(item), cancel);
             return await productTask;
         }
 
