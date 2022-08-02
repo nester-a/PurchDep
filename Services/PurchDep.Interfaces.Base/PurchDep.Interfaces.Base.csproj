@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Data\PurchDep.Dal\PurchDep.Dal.csproj" />
+  </ItemGroup>
+
 </Project>
