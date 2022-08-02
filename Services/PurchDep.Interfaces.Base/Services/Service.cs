@@ -1,23 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using PurchDep.Interfaces.Base.Mapping;
 
 namespace PurchDep.Interfaces.Base.Services
 {
-    public class Service<T, TKey> : IService<T, TKey>, IAsyncService<T, TKey> where T : class
+    public class Service<TSource, TResult, TKey> : IService<TResult, TKey>, IAsyncService<TResult, TKey> where TSource : class where TResult: class
     {
-        Repository<T, TKey> _repository;
-        public Service(Repository<T, TKey> repository)
+        Repository<TSource, TKey> _repository;
+        IMapperService<TSource, TResult> _mapper;
+
+        public Service(Repository<TSource, TKey> repository, IMapperService<TSource, TResult> mapper)
         {
             _repository = repository;
+            _mapper = mapper;
         }
-        public T Add(T item)
+
+        public TResult Add(TResult item)
         {
+            var itemToAdd = _mapper.Map(item);
             try
             {
-                _repository.Add(item);
+                _repository.Add(itemToAdd);
             }
             catch
             {
@@ -26,11 +27,12 @@ namespace PurchDep.Interfaces.Base.Services
             return item;
         }
 
-        public async Task<T> AddAsync(T item, CancellationToken cancel = default)
+        public async Task<TResult> AddAsync(TResult item, CancellationToken cancel = default)
         {
+            var itemToAdd = await _mapper.MapAsync(item, cancel);
             try
             {
-                var result = await _repository.AddAsync(item, cancel);
+                var result = await _repository.AddAsync(itemToAdd, cancel);
             }
             catch
             {
@@ -39,115 +41,126 @@ namespace PurchDep.Interfaces.Base.Services
             return item;
         }
 
-        public T Delete(TKey id)
+        public TResult Delete(TKey id)
         {
-            T result;
+            TSource sourceResult;
             try
             {
-                result = _repository.Delete(id);
+                sourceResult = _repository.Delete(id);
             }
             catch
             {
                 throw;
             }
+
+            var result = _mapper.Map(sourceResult);
             return result;
         }
 
-        public async Task<T> DeleteAsync(TKey id, CancellationToken cancel = default)
+        public async Task<TResult> DeleteAsync(TKey id, CancellationToken cancel = default)
         {
-            T result;
+            TSource sourceResult;
             try
             {
-                result = await _repository.DeleteAsync(id, cancel);
+                sourceResult = await _repository.DeleteAsync(id, cancel);
             }
             catch
             {
                 throw;
             }
+            var result = await _mapper.MapAsync(sourceResult, cancel);
             return result;
         }
 
-        public T Get(TKey id)
+        public TResult Get(TKey id)
         {
-            T result;
+            TSource sourceResult;
             try
             {
-                result = _repository.Get(id);
+                sourceResult = _repository.Get(id);
             }
             catch
             {
                 throw;
             }
+            var result = _mapper.Map(sourceResult);
             return result;
         }
 
-        public ICollection<T> GetAll()
+        public ICollection<TResult> GetAll()
         {
-            ICollection<T> result;
+            ICollection<TSource> sourceResult;
             try
             {
-                result = _repository.GetAll();
+                sourceResult = _repository.GetAll();
             }
             catch
             {
                 throw;
             }
+            var result = _mapper.MapRange(sourceResult);
             return result;
         }
 
-        public async Task<ICollection<T>> GetAllAsync(CancellationToken cancel = default)
+        public async Task<ICollection<TResult>> GetAllAsync(CancellationToken cancel = default)
         {
-            ICollection<T> result;
+            ICollection<TSource> sourceResult;
             try
             {
-                result = await _repository.GetAllAsync(cancel);
+                sourceResult = await _repository.GetAllAsync(cancel);
             }
             catch
             {
                 throw;
             }
+            var result = await _mapper.MapRangeAsync(sourceResult, cancel);
             return result;
         }
 
-        public async Task<T> GetAsync(TKey id, CancellationToken cancel = default)
+        public async Task<TResult> GetAsync(TKey id, CancellationToken cancel = default)
         {
-            T result;
+            TSource sourceResult;
             try
             {
-                result = await _repository.GetAsync(id, cancel);
+                sourceResult = await _repository.GetAsync(id, cancel);
             }
             catch
             {
                 throw;
             }
+            var result = await _mapper.MapAsync(sourceResult, cancel);
             return result;
         }
 
-        public T Update(TKey id, T updatedItem)
+        public TResult Update(TKey id, TResult updatedItem)
         {
-            T result;
+            TSource sourceResult;
+            var sourceToUpdate = _mapper.Map(updatedItem);
             try
             {
-                result = _repository.Update(id, updatedItem);
+                sourceResult = _repository.Update(id, sourceToUpdate);
             }
             catch
             {
                 throw;
             }
+            var result = _mapper.Map(sourceResult);
             return result;
         }
 
-        public async Task<T> UpdateAsync(TKey id, T updatedItem, CancellationToken cancel = default)
+        public async Task<TResult> UpdateAsync(TKey id, TResult updatedItem, CancellationToken cancel = default)
         {
-            T result;
+            TSource sourceResult;
+            var sourceToUpdate = await _mapper.MapAsync(updatedItem, cancel);
             try
             {
-                result = await _repository.UpdateAsync(id, updatedItem, cancel);
+                sourceResult = await _repository.UpdateAsync(id, sourceToUpdate, cancel);
             }
             catch
             {
                 throw;
             }
+            var result = await _mapper.MapAsync(sourceResult, cancel);
             return result;
         }
     }
