@@ -12,7 +12,7 @@ namespace Data.PurchDep.Dal.Tests.Fixtures
         public DbFixture()
         {
             var builder = new DbContextOptionsBuilder<PurchDepContext>();
-            builder.UseInMemoryDatabase("InMemoryDb");
+            builder.UseInMemoryDatabase("Data.PurchDep.Dal.Tests.InMemoryDb");
             builder.EnableSensitiveDataLogging();
 
             var options = builder.Options;
