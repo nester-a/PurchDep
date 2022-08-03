@@ -2,58 +2,34 @@
 
 namespace PurchDep.Interfaces.Base.Services
 {
-    public class Service<TSource, TResult, TKey> : IService<TResult, TKey>, IAsyncService<TResult, TKey> where TSource : class where TResult: class
+    public abstract class Service<TSource, TResult, TKey> : IService<TResult, TKey>, IAsyncService<TResult, TKey> where TSource : class where TResult: class
     {
-        Repository<TSource, TKey> _repository;
-        IMapperService<TSource, TResult> _mapper;
+        protected Repository<TSource, TKey> Repository { get; private set; }
+        protected IMappingService<TSource, TResult> Mapper { get; private set; }
 
-        public Service(Repository<TSource, TKey> repository, IMapperService<TSource, TResult> mapper)
+        protected Service(Repository<TSource, TKey> repository, IMappingService<TSource, TResult> mapper)
         {
-            _repository = repository;
-            _mapper = mapper;
+            Repository = repository;
+            Mapper = mapper;
         }
 
-        public TResult Add(TResult item)
-        {
-            var itemToAdd = _mapper.Map(item);
-            try
-            {
-                _repository.Add(itemToAdd);
-            }
-            catch
-            {
-                throw;
-            }
-            return item;
-        }
+        public abstract TResult Add(TResult item);
 
-        public async Task<TResult> AddAsync(TResult item, CancellationToken cancel = default)
-        {
-            var itemToAdd = await _mapper.MapAsync(item, cancel);
-            try
-            {
-                var result = await _repository.AddAsync(itemToAdd, cancel);
-            }
-            catch
-            {
-                throw;
-            }
-            return item;
-        }
+        public abstract Task<TResult> AddAsync(TResult item, CancellationToken cancel = default);
 
         public TResult Delete(TKey id)
         {
             TSource sourceResult;
             try
             {
-                sourceResult = _repository.Delete(id);
+                sourceResult = Repository.Delete(id);
             }
             catch
             {
                 throw;
             }
 
-            var result = _mapper.Map(sourceResult);
+            var result = Mapper.Map(sourceResult);
             return result;
         }
 
@@ -62,13 +38,13 @@ namespace PurchDep.Interfaces.Base.Services
             TSource sourceResult;
             try
             {
-                sourceResult = await _repository.DeleteAsync(id, cancel);
+                sourceResult = await Repository.DeleteAsync(id, cancel);
             }
             catch
             {
                 throw;
             }
-            var result = await _mapper.MapAsync(sourceResult, cancel);
+            var result = await Mapper.MapAsync(sourceResult, cancel);
             return result;
         }
 
@@ -77,13 +53,13 @@ namespace PurchDep.Interfaces.Base.Services
             TSource sourceResult;
             try
             {
-                sourceResult = _repository.Get(id);
+                sourceResult = Repository.Get(id);
             }
             catch
             {
                 throw;
             }
-            var result = _mapper.Map(sourceResult);
+            var result = Mapper.Map(sourceResult);
             return result;
         }
 
@@ -92,13 +68,13 @@ namespace PurchDep.Interfaces.Base.Services
             ICollection<TSource> sourceResult;
             try
             {
-                sourceResult = _repository.GetAll();
+                sourceResult = Repository.GetAll();
             }
             catch
             {
                 throw;
             }
-            var result = _mapper.MapRange(sourceResult);
+            var result = Mapper.MapRange(sourceResult);
             return result;
         }
 
@@ -107,13 +83,13 @@ namespace PurchDep.Interfaces.Base.Services
             ICollection<TSource> sourceResult;
             try
             {
-                sourceResult = await _repository.GetAllAsync(cancel);
+                sourceResult = await Repository.GetAllAsync(cancel);
             }
             catch
             {
                 throw;
             }
-            var result = await _mapper.MapRangeAsync(sourceResult, cancel);
+            var result = await Mapper.MapRangeAsync(sourceResult, cancel);
             return result;
         }
 
@@ -122,46 +98,50 @@ namespace PurchDep.Interfaces.Base.Services
             TSource sourceResult;
             try
             {
-                sourceResult = await _repository.GetAsync(id, cancel);
+                sourceResult = await Repository.GetAsync(id, cancel);
             }
             catch
             {
                 throw;
             }
-            var result = await _mapper.MapAsync(sourceResult, cancel);
+            var result = await Mapper.MapAsync(sourceResult, cancel);
             return result;
         }
 
         public TResult Update(TKey id, TResult updatedItem)
         {
             TSource sourceResult;
-            var sourceToUpdate = _mapper.Map(updatedItem);
+            var sourceToUpdate = Mapper.Map(updatedItem);
             try
             {
-                sourceResult = _repository.Update(id, sourceToUpdate);
+                sourceResult = Repository.Update(id, sourceToUpdate);
             }
             catch
             {
                 throw;
             }
-            var result = _mapper.Map(sourceResult);
+            var result = Mapper.Map(sourceResult);
             return result;
         }
 
         public async Task<TResult> UpdateAsync(TKey id, TResult updatedItem, CancellationToken cancel = default)
         {
             TSource sourceResult;
-            var sourceToUpdate = await _mapper.MapAsync(updatedItem, cancel);
+            var sourceToUpdate = await Mapper.MapAsync(updatedItem, cancel);
             try
             {
-                sourceResult = await _repository.UpdateAsync(id, sourceToUpdate, cancel);
+                sourceResult = await Repository.UpdateAsync(id, sourceToUpdate, cancel);
             }
             catch
             {
                 throw;
             }
-            var result = await _mapper.MapAsync(sourceResult, cancel);
+            var result = await Mapper.MapAsync(sourceResult, cancel);
             return result;
         }
+    }
+    public abstract class Service<TSource, TResult> : Service<TSource, TResult, int>, IService<TResult>, IAsyncService<TResult> where TSource : class where TResult : class
+    {
+        protected Service(Repository<TSource, int> repository, IMappingService<TSource, TResult> mapper) : base(repository, mapper) { }
     }
 }
