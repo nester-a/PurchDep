@@ -44,5 +44,45 @@ namespace Services.PurchDep.Interfaces.Tests.Mapping
             Assert.Equal(TestData.Supplier2.Id, mapBack.Id);
             Assert.Equal(TestData.Supplier2.Name, mapBack.Name);
         }
+
+        [Fact]
+        public void MapRangeTest()
+        {
+            var source = TestData.AllSuppliers;
+            var res = _mapper.MapRange(source);
+
+            Assert.Equal(source.Count, res.Count);
+            foreach (var item in res)
+            {
+                Assert.True(item is ISupplier);
+            }
+
+            var mapBack = _mapper.MapRange(res);
+            Assert.Equal(source.Count, mapBack.Count);
+            foreach (var item in mapBack)
+            {
+                Assert.True(item is SupplierDal);
+            }
+        }
+
+        [Fact]
+        public async Task MapRangeAsyncTest()
+        {
+            var source = TestData.AllSuppliers;
+            var res = await _mapper.MapRangeAsync(source);
+
+            Assert.Equal(source.Count, res.Count);
+            foreach (var item in res)
+            {
+                Assert.True(item is ISupplier);
+            }
+
+            var mapBack = await _mapper.MapRangeAsync(res);
+            Assert.Equal(source.Count, mapBack.Count);
+            foreach (var item in mapBack)
+            {
+                Assert.True(item is SupplierDal);
+            }
+        }
     }
 }
