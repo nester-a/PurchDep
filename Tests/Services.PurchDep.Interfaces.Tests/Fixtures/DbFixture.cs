@@ -24,8 +24,6 @@ namespace Services.PurchDep.Interfaces.Tests.Fixtures
 
             AddProducts();
             AddSuppliers();
-
-
             Db.SaveChanges();
         }
 
