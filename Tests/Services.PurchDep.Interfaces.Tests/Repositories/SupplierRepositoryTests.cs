@@ -10,7 +10,7 @@ using Xunit;
 
 namespace Services.PurchDep.Interfaces.Tests.Repositories
 {
-    [Collection("Database collection")]
+    [Collection("Repo Database collection")]
     public class SupplierRepositoryTests
     {
         DbFixture _fixture;
