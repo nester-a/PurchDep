@@ -5,7 +5,6 @@ using PurchDep.Interfaces.Services;
 using Services.PurchDep.Interfaces.Tests.Data;
 using Services.PurchDep.Interfaces.Tests.Fixtures;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using PurchDep.Domain;
 using System.Threading.Tasks;
@@ -316,7 +315,7 @@ namespace Services.PurchDep.Interfaces.Tests.Services
         public async Task UpdateAsyncTest(string newName)
         {
             var productToUpdate = new Product { Name = newName };
-            var res = await _service.UpdateAsync(RepoTestData.Product2.Id, productToUpdate);
+            var res = await _service.UpdateAsync(ServicesTestData.Product2.Id, productToUpdate);
 
             Assert.Equal(ServicesTestData.Product2.Id, res.Id);
             Assert.Equal(ServicesTestData.Product2.Name, res.Name);
