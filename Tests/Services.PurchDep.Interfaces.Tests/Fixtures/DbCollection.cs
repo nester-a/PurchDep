@@ -2,6 +2,6 @@
 
 namespace Services.PurchDep.Interfaces.Tests.Fixtures
 {
-    [CollectionDefinition("Database collection")]
+    [CollectionDefinition("Repo Database collection")]
     public class DbCollection : ICollectionFixture<DbFixture> { }
 }

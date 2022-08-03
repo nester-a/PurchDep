@@ -1,18 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PurchDep.Dal;
 using Services.PurchDep.Interfaces.Tests.Data;
-using System;
 
 namespace Services.PurchDep.Interfaces.Tests.Fixtures
 {
-    public class DbFixture : IDisposable
+    public class ServiceDbFixture
     {
         public PurchDepContext Db { get; private set; }
 
-        public DbFixture()
+        public ServiceDbFixture()
         {
             var builder = new DbContextOptionsBuilder<PurchDepContext>();
-            builder.UseInMemoryDatabase("Services.PurchDep.Interfaces.Tests.InMemoryDb.Repo");
+            builder.UseInMemoryDatabase("Services.PurchDep.Interfaces.Tests.InMemoryDb.Service");
             builder.EnableSensitiveDataLogging();
 
             var options = builder.Options;
@@ -29,12 +28,12 @@ namespace Services.PurchDep.Interfaces.Tests.Fixtures
 
         private void AddProducts()
         {
-            Db.Products.AddRange(RepoTestData.AllProducts);
+            Db.Products.AddRange(ServicesTestData.AllProducts);
         }
 
         private void AddSuppliers()
         {
-            Db.Suppliers.AddRange(RepoTestData.AllSuppliers);
+            Db.Suppliers.AddRange(ServicesTestData.AllSuppliers);
         }
         public void Dispose()
         {
