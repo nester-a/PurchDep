@@ -19,12 +19,10 @@ builder.Services.AddScoped<IProduct, ProductDom>();
 builder.Services.AddScoped<ISupplier, SupplierDom>();
 builder.Services.AddScoped<IMappingService<Product, IProduct>, ProductMappingService>();
 builder.Services.AddScoped<IMappingService<Supplier, ISupplier>, SupplierMappingService>();
-builder.Services.AddScoped<IRepository<Product>, ProductRepository>();
-//builder.Services.AddScoped<Repository<Product>, ProductRepository>();
-builder.Services.AddScoped<IRepository<Supplier>, SupplierRepository>();
-//builder.Services.AddScoped<Repository<Supplier>, SupplierRepository>();
-builder.Services.AddScoped<IService<IProduct>, ProductService>();
-builder.Services.AddScoped<IService<ISupplier>, SupplierService>();
+builder.Services.AddScoped<Repository<Product>, ProductRepository>();
+builder.Services.AddScoped<Repository<Supplier>, SupplierRepository>();
+builder.Services.AddScoped<Service<Product, IProduct>, ProductService>();
+//builder.Services.AddScoped<Service<Supplier, ISupplier>, SupplierService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

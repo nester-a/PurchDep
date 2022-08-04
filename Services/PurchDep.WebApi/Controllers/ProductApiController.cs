@@ -26,7 +26,7 @@ namespace PurchDep.WebApi.Controllers
         {
             var items = _service.GetAll();
 
-            if(!items.Any()) return NoContent();
+            if (!items.Any()) return NoContent();
 
             return Ok(items);
         }
@@ -53,7 +53,7 @@ namespace PurchDep.WebApi.Controllers
             {
                 _service.Add(item);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
