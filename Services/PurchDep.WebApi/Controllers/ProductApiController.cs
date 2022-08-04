@@ -2,15 +2,10 @@
 using PurchDep.Dal.Entities;
 using PurchDep.Domain.Base;
 using PurchDep.Interfaces.Base.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PurchDep.WebApi.Controllers
 {
-    [Route("/products")]
+    [Route("api/products")]
     [ApiController]
     public class ProductApiController : ControllerBase
     {
@@ -31,7 +26,7 @@ namespace PurchDep.WebApi.Controllers
             return Ok(items);
         }
 
-        [HttpGet("id:int")]
+        [HttpGet("id")]
         public IActionResult GetById(int id)
         {
             IProduct item;
@@ -61,7 +56,7 @@ namespace PurchDep.WebApi.Controllers
             return Ok(item);
         }
 
-        [HttpPut("id:int")]
+        [HttpPut("id")]
         public IActionResult Edit(int id, [FromBody] IProduct itemToEdit)
         {
             IProduct product;
@@ -81,7 +76,7 @@ namespace PurchDep.WebApi.Controllers
             return Ok(product);
         }
 
-        [HttpDelete("id:int")]
+        [HttpDelete("id")]
         public IActionResult Delete(int id)
         {
             IProduct item;

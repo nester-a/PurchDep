@@ -7,16 +7,11 @@ using PurchDep.Interfaces.Repositories;
 using PurchDep.Interfaces.Services;
 using PurchDep.WebApi.DependencyInjection;
 
-using ProductDom = PurchDep.Domain.Product;
-using SupplierDom = PurchDep.Domain.Supplier;
-
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 // Add services to the container.
-builder.Services.AddAppContext(configuration);
-builder.Services.AddScoped<IProduct, ProductDom>();
-builder.Services.AddScoped<ISupplier, SupplierDom>();
+builder.Services.AddAppContext(configuration);;
 builder.Services.AddScoped<IMappingService<Product, IProduct>, ProductMappingService>();
 builder.Services.AddScoped<IMappingService<Supplier, ISupplier>, SupplierMappingService>();
 builder.Services.AddScoped<Repository<Product>, ProductRepository>();
