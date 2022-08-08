@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using Xunit;
 
 using SupplierDal = PurchDep.Dal.Entities.Supplier;
+using SupplierDom = PurchDep.Domain.Supplier;
 
 namespace Services.PurchDep.Interfaces.Tests.Mapping
 {
     public class SupplierMappingServiceTests
     {
-        IMappingService<SupplierDal, ISupplier> _mapper;
+        IMappingService<SupplierDal, SupplierDom> _mapper;
         public SupplierMappingServiceTests()
         {
             _mapper = new SupplierMappingService();
