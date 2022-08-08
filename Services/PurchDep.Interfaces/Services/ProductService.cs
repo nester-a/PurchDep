@@ -1,7 +1,7 @@
 ﻿using PurchDep.Interfaces.Base.Mapping;
 using PurchDep.Interfaces.Base.Services;
 using ProductDal = PurchDep.Dal.Entities.Product;
-using ProductDom = PurchDep.Domain.Base.IProduct;
+using ProductDom = PurchDep.Domain.Product;
 
 namespace PurchDep.Interfaces.Services
 {

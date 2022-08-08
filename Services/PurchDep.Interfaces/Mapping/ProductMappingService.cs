@@ -1,11 +1,11 @@
-﻿using PurchDep.Domain.Base;
-using PurchDep.Interfaces.Base.Mapping;
+﻿using PurchDep.Interfaces.Base.Mapping;
+using ProductDom = PurchDep.Domain.Product;
 
 namespace PurchDep.Interfaces.Mapping
 {
-    public class ProductMappingService : IMappingService<Dal.Entities.Product, IProduct>
+    public class ProductMappingService : IMappingService<Dal.Entities.Product, ProductDom>
     {
-        public IProduct Map(Dal.Entities.Product item)
+        public ProductDom Map(Dal.Entities.Product item)
         {
             if (item is null) return null;
             var product = new Domain.Product()
@@ -18,7 +18,7 @@ namespace PurchDep.Interfaces.Mapping
             return product;
         }
 
-        public Dal.Entities.Product Map(IProduct item)
+        public Dal.Entities.Product Map(ProductDom item)
         {
             if (item is null) return null;
             var product = new Dal.Entities.Product()
@@ -31,24 +31,24 @@ namespace PurchDep.Interfaces.Mapping
             return product;
         }
 
-        public async Task<IProduct> MapAsync(Dal.Entities.Product item, CancellationToken cancel = default)
+        public async Task<ProductDom> MapAsync(Dal.Entities.Product item, CancellationToken cancel = default)
         {
             if (item is null) return null;
             var productTask = Task.Factory.StartNew(() => Map(item), cancel);
             return await productTask;
         }
 
-        public async Task<Dal.Entities.Product> MapAsync(IProduct item, CancellationToken cancel = default)
+        public async Task<Dal.Entities.Product> MapAsync(ProductDom item, CancellationToken cancel = default)
         {
             if (item is null) return null;
             Task<Dal.Entities.Product> productTask = Task.Factory.StartNew(() => Map(item), cancel);
             return await productTask;
         }
 
-        public ICollection<IProduct> MapRange(ICollection<Dal.Entities.Product> items)
+        public ICollection<ProductDom> MapRange(ICollection<Dal.Entities.Product> items)
         {
             if (items is null) return null;
-            ICollection<IProduct> products = new List<IProduct>();
+            ICollection<ProductDom> products = new List<ProductDom>();
             foreach (var item in items)
             {
                 products.Add(Map(item));
@@ -56,7 +56,7 @@ namespace PurchDep.Interfaces.Mapping
             return products;
         }
 
-        public ICollection<Dal.Entities.Product> MapRange(ICollection<IProduct> items)
+        public ICollection<Dal.Entities.Product> MapRange(ICollection<ProductDom> items)
         {
             if (items is null) return null;
             ICollection<Dal.Entities.Product> products = new List<Dal.Entities.Product>();
@@ -67,14 +67,14 @@ namespace PurchDep.Interfaces.Mapping
             return products;
         }
 
-        public async Task<ICollection<IProduct>> MapRangeAsync(ICollection<Dal.Entities.Product> items, CancellationToken cancel = default)
+        public async Task<ICollection<ProductDom>> MapRangeAsync(ICollection<Dal.Entities.Product> items, CancellationToken cancel = default)
         {
             if (items is null) return null;
             var productsTask = Task.Factory.StartNew(() => MapRange(items), cancel);
             return await productsTask;
         }
 
-        public async Task<ICollection<Dal.Entities.Product>> MapRangeAsync(ICollection<IProduct> items, CancellationToken cancel = default)
+        public async Task<ICollection<Dal.Entities.Product>> MapRangeAsync(ICollection<ProductDom> items, CancellationToken cancel = default)
         {
             if (items is null) return null;
             var productsTask = Task.Factory.StartNew(() => MapRange(items), cancel);
