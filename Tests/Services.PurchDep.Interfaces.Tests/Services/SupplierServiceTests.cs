@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using Xunit;
 
 using SupplierDal = PurchDep.Dal.Entities.Supplier;
-using SupplierDom = PurchDep.Domain.Base.ISupplier;
+using SupplierDom = PurchDep.Domain.Supplier;
 using PurchDep.Interfaces.Base.Mapping;
 
 namespace Services.PurchDep.Interfaces.Tests.Services

@@ -1,6 +1,5 @@
 using PurchDep.Dal;
 using PurchDep.Dal.Entities;
-using PurchDep.Domain.Base;
 using PurchDep.Interfaces.Base.Mapping;
 using PurchDep.Interfaces.Base.Services;
 using PurchDep.Interfaces.Mapping;
@@ -9,6 +8,7 @@ using PurchDep.Interfaces.Services;
 using PurchDep.WebApi.DependencyInjection;
 
 using ProductDom = PurchDep.Domain.Product;
+using SupplierDom = PurchDep.Domain.Supplier;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -16,11 +16,11 @@ var configuration = builder.Configuration;
 // Add services to the container.
 builder.Services.AddAppContext(configuration);
 builder.Services.AddScoped<IMappingService<Product, ProductDom>, ProductMappingService>();
-builder.Services.AddScoped<IMappingService<Supplier, ISupplier>, SupplierMappingService>();
+builder.Services.AddScoped<IMappingService<Supplier, SupplierDom>, SupplierMappingService>();
 builder.Services.AddScoped<Repository<Product>, ProductRepository>();
 builder.Services.AddScoped<Repository<Supplier>, SupplierRepository>();
 builder.Services.AddScoped<Service<Product, ProductDom>, ProductService>();
-builder.Services.AddScoped<Service<Supplier, ISupplier>, SupplierService>();
+builder.Services.AddScoped<Service<Supplier, SupplierDom>, SupplierService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

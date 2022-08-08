@@ -2,14 +2,16 @@
 using PurchDep.Domain.Base;
 using PurchDep.Interfaces.Base.Mapping;
 
+using SupplierDom = PurchDep.Domain.Supplier;
+
 namespace PurchDep.Interfaces.Mapping
 {
-    public class SupplierMappingService : IMappingService<Dal.Entities.Supplier, ISupplier>
+    public class SupplierMappingService : IMappingService<Supplier, SupplierDom>
     {
-        public ISupplier Map(Supplier item)
+        public SupplierDom Map(Supplier item)
         {
             if (item is null) return null;
-            var supplier = new Domain.Supplier()
+            var supplier = new SupplierDom()
             {
                 Id = item.Id,
                 Name = item.Name,
@@ -28,7 +30,7 @@ namespace PurchDep.Interfaces.Mapping
             return supplier;
         }
 
-        public Supplier Map(ISupplier item)
+        public Supplier Map(SupplierDom item)
         {
             if (item is null) return null;
             var supplier = new Supplier()
@@ -50,24 +52,24 @@ namespace PurchDep.Interfaces.Mapping
             return supplier;
         }
 
-        public async Task<ISupplier> MapAsync(Supplier item, CancellationToken cancel = default)
+        public async Task<SupplierDom> MapAsync(Supplier item, CancellationToken cancel = default)
         {
             if (item is null) return null;
             var supplierTask = Task.Factory.StartNew(() => Map(item), cancel);
             return await supplierTask;
         }
 
-        public async Task<Supplier> MapAsync(ISupplier item, CancellationToken cancel = default)
+        public async Task<Supplier> MapAsync(SupplierDom item, CancellationToken cancel = default)
         {
             if (item is null) return null;
             var supplierTask = Task.Factory.StartNew(() => Map(item), cancel);
             return await supplierTask;
         }
 
-        public ICollection<ISupplier> MapRange(ICollection<Supplier> items)
+        public ICollection<SupplierDom> MapRange(ICollection<Supplier> items)
         {
             if (items is null) return null;
-            var suppliers = new List<ISupplier>();
+            var suppliers = new List<SupplierDom>();
             foreach (var item in items)
             {
                 suppliers.Add(Map(item));
@@ -75,7 +77,7 @@ namespace PurchDep.Interfaces.Mapping
             return suppliers;
         }
 
-        public ICollection<Supplier> MapRange(ICollection<ISupplier> items)
+        public ICollection<Supplier> MapRange(ICollection<SupplierDom> items)
         {
             if (items is null) return null;
             var suppliers = new List<Supplier>();
@@ -86,14 +88,14 @@ namespace PurchDep.Interfaces.Mapping
             return suppliers;
         }
 
-        public async Task<ICollection<ISupplier>> MapRangeAsync(ICollection<Supplier> items, CancellationToken cancel = default)
+        public async Task<ICollection<SupplierDom>> MapRangeAsync(ICollection<Supplier> items, CancellationToken cancel = default)
         {
             if (items is null) return null;
             var suppliersTask = Task.Factory.StartNew(() => MapRange(items), cancel);
             return await suppliersTask;
         }
 
-        public async Task<ICollection<Supplier>> MapRangeAsync(ICollection<ISupplier> items, CancellationToken cancel = default)
+        public async Task<ICollection<Supplier>> MapRangeAsync(ICollection<SupplierDom> items, CancellationToken cancel = default)
         {
             if (items is null) return null;
             var suppliersTask = Task.Factory.StartNew(() => MapRange(items), cancel);

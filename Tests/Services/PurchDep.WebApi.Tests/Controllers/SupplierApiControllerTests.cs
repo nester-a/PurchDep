@@ -33,7 +33,7 @@ namespace PurchDep.WebApi.Tests.Controllers
         {
             var actionRes = _controller.GetAll();
             var returnedRes = actionRes as OkObjectResult;
-            var returnedObj = returnedRes!.Value as ICollection<ISupplier>;
+            var returnedObj = returnedRes!.Value as ICollection<Supplier>;
             Assert.True(returnedRes.StatusCode == 200);
             Assert.NotEqual(0, returnedObj!.Count);
         }

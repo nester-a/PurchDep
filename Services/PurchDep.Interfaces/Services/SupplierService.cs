@@ -1,7 +1,7 @@
 ﻿using PurchDep.Interfaces.Base.Mapping;
 using PurchDep.Interfaces.Base.Services;
 using SupplierDal = PurchDep.Dal.Entities.Supplier;
-using SupplierDom = PurchDep.Domain.Base.ISupplier;
+using SupplierDom = PurchDep.Domain.Supplier;
 
 namespace PurchDep.Interfaces.Services
 {
