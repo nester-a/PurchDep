@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Common\PurchDep.Domain.Base\PurchDep.Domain.Base.csproj" />
+    <ProjectReference Include="..\..\Common\PurchDep.Domain\PurchDep.Domain.csproj" />
     <ProjectReference Include="..\PurchDep.Interfaces.Base\PurchDep.Interfaces.Base.csproj" />
   </ItemGroup>
 
