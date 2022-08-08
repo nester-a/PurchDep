@@ -2,7 +2,7 @@
 
 namespace PurchDep.Interfaces.Base.Services
 {
-    public abstract class Service<TSource, TResult, TKey> : IService<TResult, TKey>, IAsyncService<TResult, TKey> where TSource : class where TResult: class
+    public abstract class Service<TSource, TResult, TKey> : IService<TResult, TKey> where TSource : class where TResult: class
     {
         protected Repository<TSource, TKey> Repository { get; private set; }
         protected IMappingService<TSource, TResult> Mapper { get; private set; }
@@ -140,7 +140,7 @@ namespace PurchDep.Interfaces.Base.Services
             return result;
         }
     }
-    public abstract class Service<TSource, TResult> : Service<TSource, TResult, int>, IService<TResult>, IAsyncService<TResult> where TSource : class where TResult : class
+    public abstract class Service<TSource, TResult> : Service<TSource, TResult, int>, IService<TResult> where TSource : class where TResult : class
     {
         protected Service(Repository<TSource, int> repository, IMappingService<TSource, TResult> mapper) : base(repository, mapper) { }
     }
