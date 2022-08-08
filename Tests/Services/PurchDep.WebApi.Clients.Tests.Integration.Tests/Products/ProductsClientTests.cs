@@ -3,7 +3,6 @@ using PurchDep.Domain;
 using PurchDep.WebApi.Clients.Products;
 using PurchDep.WebApi.Clients.Tests.Integration.Tests.Fixtures;
 using System;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -204,7 +203,24 @@ namespace PurchDep.WebApi.Clients.Tests.Integration.Tests.Products
             Assert.Null(res);
         }
 
-        //UPDATE
+        [Theory]
+        [InlineData("UpdatedItem")]
+        public void Update_Test(string newName)
+        {
+            var itemToUpdate = new Product() { Name = newName};
+
+            var res = _client.Update(TestData.Product1.Id, itemToUpdate);
+            Assert.NotNull(res);
+            Assert.True(res is Product);
+            Assert.NotEqual(0, res.Id);
+            Assert.Equal(itemToUpdate.Name, res.Name);
+        }
+
+        [Fact]
+        public void Update_Null_Item_Returns_Exception_Test()
+        {
+
+        }
         //DELETE
     }
 }

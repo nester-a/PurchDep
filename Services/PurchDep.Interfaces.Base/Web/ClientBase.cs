@@ -84,7 +84,7 @@ namespace PurchDep.Interfaces.Base.Web
         {
             var response = await Client.PutAsJsonAsync(url, value, cancel).ConfigureAwait(false);
 
-            return response.EnsureSuccessStatusCode();
+            return response;
         }
         private HttpResponseMessage Put(string url, T value) => PutAsync(url, value).Result;
         private async Task<HttpResponseMessage> DeleteAsync(string url, CancellationToken cancel = default)
@@ -124,26 +124,24 @@ namespace PurchDep.Interfaces.Base.Web
             {
                 throw new InvalidOperationException($"This Item-{nameof(item)} cannot be added");
             }
-            var addedItem = response.Content.ReadFromJsonAsync<T>().Result;
+            var addedItem = await response.Content.ReadFromJsonAsync<T>();
 
-            return addedItem;
+            return addedItem!;
         }
 
         public async Task<T> UpdateAsync(int id, T updatedItem, CancellationToken cancel = default)
         {
             if (updatedItem is null) throw new ArgumentNullException("The Item being updated is null");
 
-            var response = await PutAsync(Address, updatedItem, cancel);
-            var result = response.IsSuccessStatusCode;
+            var response = await PutAsync($"{Address}/{id}", updatedItem, cancel);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new InvalidOperationException($"This Item-{nameof(updatedItem)} cannot be updated");
+            }
             var resultItem = await response.Content.ReadFromJsonAsync<T>();
 
-            if (result && resultItem is not null) return resultItem;
-
-            var exMes = await response.Content.ReadFromJsonAsync<string>();
-            if (exMes is not null)
-                throw new InvalidOperationException(exMes);
-            else
-                throw new ArgumentException($"This Item-{nameof(updatedItem)} cannot be updated");
+            return resultItem!;
         }
 
         public async Task<T> DeleteAsync(int id, CancellationToken cancel = default)
@@ -191,24 +189,22 @@ namespace PurchDep.Interfaces.Base.Web
             }
             var addedItem = response.Content.ReadFromJsonAsync<T>().Result;
 
-            return addedItem;
+            return addedItem!;
         }
 
         public T Update(int id, T updatedItem)
         {
             if (updatedItem is null) throw new ArgumentNullException("The Item being updated is null");
 
-            var response = Put(Address, updatedItem);
-            var result = response.IsSuccessStatusCode;
+            var response = Put($"{Address}/{id}", updatedItem);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new InvalidOperationException($"This Item-{nameof(updatedItem)} cannot be updated");
+            }
             var resultItem = response.Content.ReadFromJsonAsync<T>().Result;
 
-            if (result && resultItem is not null) return resultItem;
-
-            var exMes = response.Content.ReadFromJsonAsync<string>().Result;
-            if (exMes is not null)
-                throw new InvalidOperationException(exMes);
-            else
-                throw new ArgumentException($"This Item-{nameof(updatedItem)} cannot be updated");
+            return resultItem!;
         }
 
         public T Delete(int id)
