@@ -34,14 +34,15 @@ namespace PurchDep.Interfaces.Base.Web
         }
         private async Task<T> GetAsync(string url, CancellationToken cancel = default)
         {
-            var response = await Client.GetAsync(url, cancel).ConfigureAwait(false);
+            var response = await Client.GetAsync(url, cancel);
 
-            response.EnsureSuccessStatusCode();
-
-            switch (response.StatusCode)
+            try
             {
-                case HttpStatusCode.NotFound:
-                    throw new ArgumentException($"Request - {url}. Response - NOT FOUND");
+                response.EnsureSuccessStatusCode();
+            }
+            catch (HttpRequestException ex)
+            {
+                if(ex is not null) throw new ArgumentException($"Request - {url}. Response - NOT FOUND");
             }
 
             var result = await response
@@ -76,7 +77,7 @@ namespace PurchDep.Interfaces.Base.Web
         {
             var response = await Client.PostAsJsonAsync(url, value, cancel).ConfigureAwait(false);
 
-            return response.EnsureSuccessStatusCode();
+            return response;
         }
         private HttpResponseMessage Post(string url, T value) => PostAsync(url, value).Result;
         private async Task<HttpResponseMessage> PutAsync(string url, T value, CancellationToken cancel = default)
@@ -117,17 +118,15 @@ namespace PurchDep.Interfaces.Base.Web
         public async Task<T> AddAsync(T item, CancellationToken cancel = default)
         {
             if (item is null) throw new ArgumentNullException("The Item being added is null");
+
             var response = await PostAsync(Address, item, cancel);
-            var result = response.IsSuccessStatusCode;
-            var addedItem = await response.Content.ReadFromJsonAsync<T>();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new InvalidOperationException($"This Item-{nameof(item)} cannot be added");
+            }
+            var addedItem = response.Content.ReadFromJsonAsync<T>().Result;
 
-            if (result && addedItem is not null) return addedItem;
-
-            var exMes = response.Content.ReadFromJsonAsync<string>().Result;
-            if (exMes is not null)
-                throw new InvalidOperationException(exMes);
-            else
-                throw new ArgumentException($"This Item-{nameof(item)} cannot be added");
+            return addedItem;
         }
 
         public async Task<T> UpdateAsync(int id, T updatedItem, CancellationToken cancel = default)
@@ -186,16 +185,13 @@ namespace PurchDep.Interfaces.Base.Web
             if (item is null) throw new ArgumentNullException("The Item being added is null");
 
             var response = Post(Address, item);
-            var result = response.IsSuccessStatusCode;
+            if (!response.IsSuccessStatusCode)
+            {
+                    throw new InvalidOperationException($"This Item-{nameof(item)} cannot be added");
+            }
             var addedItem = response.Content.ReadFromJsonAsync<T>().Result;
 
-            if (result && addedItem is not null) return addedItem;
-
-            var exMes = response.Content.ReadFromJsonAsync<string>().Result;
-            if (exMes is not null)
-                throw new InvalidOperationException(exMes);
-            else
-                throw new ArgumentException($"This Item-{nameof(item)} cannot be added");
+            return addedItem;
         }
 
         public T Update(int id, T updatedItem)

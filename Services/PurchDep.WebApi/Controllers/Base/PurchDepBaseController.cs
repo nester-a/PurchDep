@@ -21,7 +21,7 @@ namespace PurchDep.WebApi.Controllers.Base
             return Ok(items);
         }
 
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public virtual IActionResult GetById(int id)
         {
             TResult item;
@@ -51,7 +51,7 @@ namespace PurchDep.WebApi.Controllers.Base
             return Ok(item);
         }
 
-        [HttpPut("id")]
+        [HttpPut("{id}")]
         public virtual IActionResult Edit(int id, [FromBody] TResult itemToEdit)
         {
             TResult item;
@@ -71,7 +71,7 @@ namespace PurchDep.WebApi.Controllers.Base
             return Ok(item);
         }
 
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public virtual IActionResult Delete(int id)
         {
             TResult item;

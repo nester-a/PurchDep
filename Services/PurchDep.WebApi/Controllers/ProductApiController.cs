@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PurchDep.Dal.Entities;
-using PurchDep.Domain.Base;
 using PurchDep.Interfaces.Base.Services;
 using PurchDep.WebApi.Controllers.Base;
 
