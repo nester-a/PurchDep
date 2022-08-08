@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using Xunit;
 
 using ProductDal = PurchDep.Dal.Entities.Product;
+using ProductDom = PurchDep.Domain.Product;
 
 namespace Services.PurchDep.Interfaces.Tests.Mapping
 {
     public class ProductMappingServiceTests
     {
-        IMappingService<ProductDal, IProduct> _mapper;
+        IMappingService<ProductDal, ProductDom> _mapper;
         public ProductMappingServiceTests()
         {
             _mapper = new ProductMappingService();

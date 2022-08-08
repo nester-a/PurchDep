@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PurchDep.Dal;
-using PurchDep.WebApi.Tests.Data;
 
 namespace PurchDep.WebApi.Tests.Fixtures
 {
@@ -28,12 +27,12 @@ namespace PurchDep.WebApi.Tests.Fixtures
 
         private void AddProducts()
         {
-            Db.Products.AddRange(TestData.AllProducts);
+            Db.Products.AddRange(Data.TestData.AllProducts);
         }
 
         private void AddSuppliers()
         {
-            Db.Suppliers.AddRange(TestData.AllSuppliers);
+            Db.Suppliers.AddRange(Data.TestData.AllSuppliers);
         }
         public void Dispose()
         {

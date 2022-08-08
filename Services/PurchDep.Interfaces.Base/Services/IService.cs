@@ -1,13 +1,5 @@
 ﻿namespace PurchDep.Interfaces.Base.Services
 {
-    public interface IService<T, in TKey> where T: class
-    {
-        ICollection<T> GetAll();
-        T Get(TKey id);
-        T Add(T item);
-        T Update(TKey id, T updatedItem);
-        T Delete(TKey id);
-    }
-
-    public interface IService<T> : IService<T, int> where T : class { }
+    public interface IService<TResult, TKey> : ISyncService<TResult, TKey>, IAsyncService<TResult, TKey> where TResult : class { }
+    public interface IService<TResult> : IService<TResult, int>, ISyncService<TResult>, IAsyncService<TResult> where TResult : class { }
 }
