@@ -147,15 +147,12 @@ namespace PurchDep.Interfaces.Base.Web
         public async Task<T> DeleteAsync(int id, CancellationToken cancel = default)
         {
             var response = await DeleteAsync($"{Address}/{id}", cancel);
-            var result = response.IsSuccessStatusCode;
-            var deletedItem = await response.Content.ReadFromJsonAsync<T>();
-            if (result && deletedItem is not null) return deletedItem;
-
-            var exMes = await response.Content.ReadFromJsonAsync<string>();
-            if (exMes is not null)
-                throw new InvalidOperationException(exMes);
-            else
+            if (!response.IsSuccessStatusCode)
+            {
                 throw new ArgumentException($"This Item with Id-{id} cannot be deleted");
+            }
+            var deletedItem = await response.Content.ReadFromJsonAsync<T>();
+            return deletedItem!;
         }
 
         public ICollection<T> GetAll()
@@ -210,15 +207,12 @@ namespace PurchDep.Interfaces.Base.Web
         public T Delete(int id)
         {
             var response = Delete($"{Address}/{id}");
-            var result = response.IsSuccessStatusCode;
-            var deletedItem = response.Content.ReadFromJsonAsync<T>().Result;
-            if (result && deletedItem is not null) return deletedItem;
-
-            var exMes = response.Content.ReadFromJsonAsync<string>().Result;
-            if (exMes is not null)
-                throw new InvalidOperationException(exMes);
-            else
+            if (!response.IsSuccessStatusCode)
+            {
                 throw new ArgumentException($"This Item with Id-{id} cannot be deleted");
+            }
+            var deletedItem = response.Content.ReadFromJsonAsync<T>().Result;
+            return deletedItem!;
         }
     }
 }
