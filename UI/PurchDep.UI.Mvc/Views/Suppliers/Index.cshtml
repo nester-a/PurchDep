@@ -1,0 +1,30 @@
+﻿@model ICollection<PurchDep.Domain.Supplier>
+
+<section>
+    <h1>Products List</h1>
+    <table>
+        <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th></th>
+        </thead>
+        <tbody>
+            @foreach (var supplier in Model)
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@supplier.Id">
+                            @supplier.Id
+                        </a>
+                    </td>
+                    <td>@supplier.Name</td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@supplier.Id">
+                            Удалить
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
