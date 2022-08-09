@@ -1,0 +1,22 @@
+﻿@model ICollection<PurchDep.Domain.Product>
+
+<section>
+    <h2>Products List</h2>
+    <table>
+        <thed>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Price</th>
+        </thed>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@product.Name</td>
+                    <td>@product.Price</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</section>
