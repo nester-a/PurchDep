@@ -17,5 +17,10 @@ namespace PurchDep.UI.Mvc.Controllers
             var items = _service.GetAll();
             return View(items);
         }
+        public IActionResult Details(int id)
+        {
+            var item = _service.Get(id);
+            return View(item);
+        }
     }
 }

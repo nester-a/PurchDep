@@ -1,7 +1,7 @@
 ﻿@model ICollection<PurchDep.Domain.Product>
 
 <section>
-    <h2>Products List</h2>
+    <h1>Products List</h1>
     <table>
         <thed>
             <th>Id</th>
@@ -12,7 +12,11 @@
             @foreach (var product in Model)
             {
                 <tr>
-                    <td>@product.Id</td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@product.Id">
+                            @product.Id
+                        </a>
+                    </td>
                     <td>@product.Name</td>
                     <td>@product.Price</td>
                 </tr>
