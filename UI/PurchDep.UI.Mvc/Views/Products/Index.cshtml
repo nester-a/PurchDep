@@ -3,11 +3,12 @@
 <section>
     <h1>Products List</h1>
     <table>
-        <thed>
+        <thead>
             <th>Id</th>
             <th>Name</th>
             <th>Price</th>
-        </thed>
+            <th></th>
+        </thead>
         <tbody>
             @foreach (var product in Model)
             {
@@ -19,6 +20,11 @@
                     </td>
                     <td>@product.Name</td>
                     <td>@product.Price</td>
+                    <td>
+                        <a asp-action="Delete" asp-route-id="@product.Id">
+                            Удалить
+                        </a>
+                    </td>
                 </tr>
             }
         </tbody>

@@ -22,5 +22,10 @@ namespace PurchDep.UI.Mvc.Controllers
             var item = _service.Get(id);
             return View(item);
         }
+        public IActionResult Delete(int id)
+        {
+            _service.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
