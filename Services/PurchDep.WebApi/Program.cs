@@ -14,6 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
 
 // Add services to the container.
+//вы€влен баг, неподключаетс€ база данных
 builder.Services.AddAppContext(configuration);
 builder.Services.AddScoped<IMappingService<Product, ProductDom>, ProductMappingService>();
 builder.Services.AddScoped<IMappingService<Supplier, SupplierDom>, SupplierMappingService>();
