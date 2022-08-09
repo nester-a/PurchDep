@@ -45,7 +45,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PurchDep.WebApi.Clients.Tes
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{F243A901-B7BE-47AF-BF95-E7CB9C01E72F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurchDep.UI.Mvc", "UI\PurchDep.UI.Mvc\PurchDep.UI.Mvc.csproj", "{81807C35-E4E8-4340-BE0B-203DB70BC921}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PurchDep.UI.Mvc", "UI\PurchDep.UI.Mvc\PurchDep.UI.Mvc.csproj", "{81807C35-E4E8-4340-BE0B-203DB70BC921}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -26,7 +26,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapRazorPages();
+//app.MapRazorPages();
 
 app.UseEndpoints(endpoints =>
 {
