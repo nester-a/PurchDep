@@ -1,5 +1,4 @@
 ﻿using PurchDep.Domain;
-using PurchDep.Domain.Base;
 using PurchDep.Interfaces.Mapping;
 using PurchDep.Interfaces.Repositories;
 using PurchDep.Interfaces.Services;
@@ -42,7 +41,7 @@ namespace PurchDep.WebApi.Tests.Controllers
         {
             var actionRes = _controller.GetById(TestData.Product1.Id);
             var returnedRes = actionRes as OkObjectResult;
-            var returnedObj = returnedRes!.Value as IProduct;
+            var returnedObj = returnedRes!.Value as Product;
 
             Assert.True(returnedRes.StatusCode == 200);
             Assert.Equal(TestData.Product1.Id, returnedObj!.Id);
@@ -65,7 +64,7 @@ namespace PurchDep.WebApi.Tests.Controllers
         {
             var actionRes = _controller.Add(TestData.Product3);
             var returnedRes = actionRes as OkObjectResult;
-            var returnedObj = returnedRes!.Value as IProduct;
+            var returnedObj = returnedRes!.Value as Product;
 
             Assert.True(returnedRes.StatusCode == 200);
             Assert.Equal(TestData.Product3.Id, returnedObj!.Id);
@@ -89,7 +88,7 @@ namespace PurchDep.WebApi.Tests.Controllers
             var productToUpdate = new Product { Name = newName };
             var actionRes = _controller.Edit(TestData.Product1.Id, productToUpdate);
             var returnedRes = actionRes as OkObjectResult;
-            var returnedObj = returnedRes!.Value as IProduct;
+            var returnedObj = returnedRes!.Value as Product;
 
             Assert.True(returnedRes.StatusCode == 200);
             Assert.Equal(TestData.Product1.Id, returnedObj!.Id);
@@ -126,7 +125,7 @@ namespace PurchDep.WebApi.Tests.Controllers
 
             var actionRes = _controller.Delete(TestData.Product4.Id);
             var returnedRes = actionRes as OkObjectResult;
-            var returnedObj = returnedRes!.Value as IProduct;
+            var returnedObj = returnedRes!.Value as Product;
 
             Assert.True(returnedRes.StatusCode == 200);
             Assert.Equal(TestData.Product4.Id, returnedObj!.Id);
