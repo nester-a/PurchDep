@@ -9,7 +9,6 @@
 
         /// <summary>Suppliers Name</summary>
         public string Name { get; set; } = string.Empty;
-        public HashSet<Product<TKey>> Products { get; set; } = new();
 
         /// <summary>Suppliers products that can be selled</summary>
         public HashSet<SuppliersProduct<TKey>> SuppliersProducts { get; set; } = new();

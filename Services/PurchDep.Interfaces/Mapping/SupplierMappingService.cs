@@ -16,13 +16,14 @@ namespace PurchDep.Interfaces.Mapping
                 Id = item.Id,
                 Name = item.Name,
             };
-            foreach (var product in item.Products)
+            foreach (var product in item.SuppliersProducts)
             {
                 if (product is null) continue;
-                supplier.Products.Add(new Domain.Product()
+                supplier.SuppliersProducts.Add(new Domain.SuppliersProduct()
                 {
-                    Id = product.Id,
-                    Name = product.Name,
+                    Id = product.ProductId,
+                    Name = product.Product.Name,
+                    SuppliersPrice = product.Price,
                 });
             }
 
@@ -37,13 +38,14 @@ namespace PurchDep.Interfaces.Mapping
                 Id = item.Id,
                 Name = item.Name,
             };
-            foreach (var product in item.Products)
+            foreach (var product in item.SuppliersProducts)
             {
                 if (product is null) continue;
-                supplier.Products.Add(new Product()
+                supplier.SuppliersProducts.Add(new()
                 {
-                    Id = product.Id,
-                    Name = product.Name,
+                    ProductId = product.Id,
+                    SupplierId = supplier.Id,
+                    Price = product.SuppliersPrice,
                 });
             }
 
