@@ -12,7 +12,6 @@ namespace PurchDep.Dal.Configuration
             builder.HasIndex(p => p.Id).IsUnique();
             builder.Property(p => p.Id).ValueGeneratedOnAdd();
             builder.Property(p => p.Name).IsRequired();
-            builder.Property(p => p.Price).IsRequired();
         }
     }
 }
