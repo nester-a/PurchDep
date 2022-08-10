@@ -1,4 +1,5 @@
-﻿using PurchDep.Domain.Base;
+﻿using PurchDep.Domain;
+using PurchDep.Domain.Base;
 using PurchDep.Interfaces.Base.Mapping;
 using PurchDep.Interfaces.Mapping;
 using Services.PurchDep.Interfaces.Tests.Data;
@@ -22,7 +23,7 @@ namespace Services.PurchDep.Interfaces.Tests.Mapping
         public void MapTest()
         {
             var res = _mapper.Map(TestData.Supplier1);
-            Assert.True(res is ISupplier);
+            Assert.True(res is SupplierDom);
             Assert.Equal(TestData.Supplier1.Id, res.Id);
             Assert.Equal(TestData.Supplier1.Name, res.Name);
 
@@ -36,7 +37,7 @@ namespace Services.PurchDep.Interfaces.Tests.Mapping
         public async Task MapAsyncTest()
         {
             var res = await _mapper.MapAsync(TestData.Supplier2);
-            Assert.True(res is ISupplier);
+            Assert.True(res is SupplierDom);
             Assert.Equal(TestData.Supplier2.Id, res.Id);
             Assert.Equal(TestData.Supplier2.Name, res.Name);
 
@@ -55,7 +56,7 @@ namespace Services.PurchDep.Interfaces.Tests.Mapping
             Assert.Equal(source.Count, res.Count);
             foreach (var item in res)
             {
-                Assert.True(item is ISupplier);
+                Assert.True(item is SupplierDom);
             }
 
             var mapBack = _mapper.MapRange(res);
@@ -75,7 +76,7 @@ namespace Services.PurchDep.Interfaces.Tests.Mapping
             Assert.Equal(source.Count, res.Count);
             foreach (var item in res)
             {
-                Assert.True(item is ISupplier);
+                Assert.True(item is SupplierDom);
             }
 
             var mapBack = await _mapper.MapRangeAsync(res);

@@ -43,7 +43,7 @@ namespace PurchDep.WebApi.Tests.Controllers
         {
             var actionRes = _controller.GetById(TestData.Supplier1.Id);
             var returnedRes = actionRes as OkObjectResult;
-            var returnedObj = returnedRes!.Value as ISupplier;
+            var returnedObj = returnedRes!.Value as Supplier;
 
             Assert.True(returnedRes.StatusCode == 200);
             Assert.Equal(TestData.Supplier1.Id, returnedObj!.Id);
@@ -65,7 +65,7 @@ namespace PurchDep.WebApi.Tests.Controllers
         {
             var actionRes = _controller.Add(TestData.Supplier3);
             var returnedRes = actionRes as OkObjectResult;
-            var returnedObj = returnedRes!.Value as ISupplier;
+            var returnedObj = returnedRes!.Value as Supplier;
 
             Assert.True(returnedRes.StatusCode == 200);
             Assert.Equal(TestData.Supplier3.Id, returnedObj!.Id);
@@ -88,7 +88,7 @@ namespace PurchDep.WebApi.Tests.Controllers
             var supplierToUpdate = new Supplier { Name = newName };
             var actionRes = _controller.Edit(TestData.Supplier1.Id, supplierToUpdate);
             var returnedRes = actionRes as OkObjectResult;
-            var returnedObj = returnedRes!.Value as ISupplier;
+            var returnedObj = returnedRes!.Value as Supplier;
 
             Assert.True(returnedRes.StatusCode == 200);
             Assert.Equal(TestData.Supplier1.Id, returnedObj!.Id);
@@ -124,7 +124,7 @@ namespace PurchDep.WebApi.Tests.Controllers
 
             var actionRes = _controller.Delete(TestData.Supplier4.Id);
             var returnedRes = actionRes as OkObjectResult;
-            var returnedObj = returnedRes!.Value as ISupplier;
+            var returnedObj = returnedRes!.Value as Supplier;
 
             Assert.True(returnedRes.StatusCode == 200);
             Assert.Equal(TestData.Supplier4.Id, returnedObj!.Id);

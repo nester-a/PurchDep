@@ -1,5 +1,4 @@
-﻿using PurchDep.Dal;
-using PurchDep.Dal.InMemory.DependencyInjection;
+﻿using PurchDep.Dal.InMemory.DependencyInjection;
 
 namespace PurchDep.WebApi.DependencyInjection
 {
@@ -16,7 +15,7 @@ namespace PurchDep.WebApi.DependencyInjection
             switch (dbName)
             {
                 case "InMemory":
-                    return services.AddInMemoryDatabase("PurchDep.WebApi.InMemoryDatabase").AddScoped<DbInitializer>();
+                    return services.AddInMemoryDatabase("PurchDep.WebApi.InMemoryDatabase");
                 default:
                     throw new InvalidOperationException();
             }
