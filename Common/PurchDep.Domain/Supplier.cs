@@ -1,11 +1,19 @@
 ﻿namespace PurchDep.Domain
 {
-    public class Supplier<T>
+    /// <summary>Supplier enity</summary>
+    /// <typeparam name="TKey">Primary key type</typeparam>
+    public class Supplier<TKey>
     {
-        public T Id { get; set; } = default(T)!;
+        /// <summary>Suppliers Id</summary>
+        public TKey Id { get; set; } = default(TKey)!;
+
+        /// <summary>Suppliers Name</summary>
         public string Name { get; set; } = string.Empty;
-        public HashSet<Product<T>> Products { get; set; } = new();
-        public HashSet<SuppliersProduct<T>> SuppliersProducts { get; set; } = new();
+        public HashSet<Product<TKey>> Products { get; set; } = new();
+
+        /// <summary>Suppliers products that can be selled</summary>
+        public HashSet<SuppliersProduct<TKey>> SuppliersProducts { get; set; } = new();
     }
+    /// <summary>Supplier enity with integer primary key</summary>
     public class Supplier : Supplier<int> { }
 }

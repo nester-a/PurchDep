@@ -1,8 +1,12 @@
 ﻿namespace PurchDep.Domain
 {
-    public class SuppliersProduct<T> : Product<T>
+    /// <summary>Products that can be selled by supplier</summary>
+    /// <typeparam name="TKey">Primary key type</typeparam>
+    public class SuppliersProduct<TKey> : Product<TKey>
     {
-        public decimal SupplierPrice { get; set; }
+        /// <summary>Supplier's price for this product</summary>
+        public decimal SuppliersPrice { get; set; }
     }
+    /// <summary>Products that can be selled by supplier with integer primary key</summary>
     public class SuppliersProduct : SuppliersProduct<int> { }
 }
