@@ -186,7 +186,6 @@ namespace Services.PurchDep.Interfaces.Tests.Services
             Assert.NotNull(res);
             Assert.Equal(ServicesTestData.Product1.Id, res.Id);
             Assert.Equal(ServicesTestData.Product1.Name, res.Name);
-            Assert.Equal(ServicesTestData.Product1.Price, res.Price);
         }
 
         [Theory]
@@ -218,7 +217,6 @@ namespace Services.PurchDep.Interfaces.Tests.Services
             Assert.NotNull(res);
             Assert.Equal(ServicesTestData.Product2.Id, res.Id);
             Assert.Equal(ServicesTestData.Product2.Name, res.Name);
-            Assert.Equal(ServicesTestData.Product2.Price, res.Price);
         }
 
         [Theory]
@@ -271,7 +269,6 @@ namespace Services.PurchDep.Interfaces.Tests.Services
             Assert.Equal(ServicesTestData.Product1.Id, res.Id);
             Assert.Equal(ServicesTestData.Product1.Name, res.Name);
             Assert.Equal(ServicesTestData.Product1.Name, newName);
-            Assert.Equal(ServicesTestData.Product1.Price, res.Price);
         }
 
         [Theory]
@@ -321,7 +318,6 @@ namespace Services.PurchDep.Interfaces.Tests.Services
             Assert.Equal(ServicesTestData.Product2.Id, res.Id);
             Assert.Equal(ServicesTestData.Product2.Name, res.Name);
             Assert.Equal(ServicesTestData.Product2.Name, newName);
-            Assert.Equal(ServicesTestData.Product2.Price, res.Price);
         }
 
         [Theory]

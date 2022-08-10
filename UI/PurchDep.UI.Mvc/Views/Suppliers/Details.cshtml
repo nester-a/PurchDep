@@ -26,7 +26,6 @@
             <thead>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Price</th>
                 <th></th>
             </thead>
             <tbody>
@@ -39,7 +38,6 @@
                             </a>
                         </td>
                         <td>@product.Name</td>
-                        <td>@product.Price</td>
                         <td>
                             <a asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id">
                                 Удалить

@@ -23,13 +23,11 @@ namespace Services.PurchDep.Interfaces.Tests.Mapping
             Assert.True(res is ProductDom);
             Assert.Equal(TestData.Product1.Id, res.Id);
             Assert.Equal(TestData.Product1.Name, res.Name);
-            Assert.Equal(TestData.Product1.Price, res.Price);
 
             var mapBack = _mapper.Map(res);
             Assert.True(mapBack is ProductDal);
             Assert.Equal(TestData.Product1.Id, mapBack.Id);
             Assert.Equal(TestData.Product1.Name, mapBack.Name);
-            Assert.Equal(TestData.Product1.Price, mapBack.Price);
         }
 
         [Fact]
@@ -39,13 +37,11 @@ namespace Services.PurchDep.Interfaces.Tests.Mapping
             Assert.True(res is ProductDom);
             Assert.Equal(TestData.Product2.Id, res.Id);
             Assert.Equal(TestData.Product2.Name, res.Name);
-            Assert.Equal(TestData.Product2.Price, res.Price);
 
             var mapBack = _mapper.Map(res);
             Assert.True(mapBack is ProductDal);
             Assert.Equal(TestData.Product2.Id, mapBack.Id);
             Assert.Equal(TestData.Product2.Name, mapBack.Name);
-            Assert.Equal(TestData.Product2.Price, mapBack.Price);
         }
 
         [Fact]

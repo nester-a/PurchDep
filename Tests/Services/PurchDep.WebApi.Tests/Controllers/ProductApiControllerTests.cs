@@ -46,7 +46,6 @@ namespace PurchDep.WebApi.Tests.Controllers
             Assert.True(returnedRes.StatusCode == 200);
             Assert.Equal(TestData.Product1.Id, returnedObj!.Id);
             Assert.Equal(TestData.Product1.Name, returnedObj.Name);
-            Assert.Equal(TestData.Product1.Price, returnedObj.Price);
         }
 
         [Theory]
@@ -69,7 +68,6 @@ namespace PurchDep.WebApi.Tests.Controllers
             Assert.True(returnedRes.StatusCode == 200);
             Assert.Equal(TestData.Product3.Id, returnedObj!.Id);
             Assert.Equal(TestData.Product3.Name, returnedObj.Name);
-            Assert.Equal(TestData.Product3.Price, returnedObj.Price);
         }
 
         [Fact]
@@ -94,7 +92,6 @@ namespace PurchDep.WebApi.Tests.Controllers
             Assert.Equal(TestData.Product1.Id, returnedObj!.Id);
             Assert.Equal(TestData.Product1.Name, returnedObj.Name);
             Assert.Equal(TestData.Product1.Name, newName);
-            Assert.Equal(TestData.Product1.Price, returnedObj.Price);
         }
 
         [Fact]
@@ -130,7 +127,6 @@ namespace PurchDep.WebApi.Tests.Controllers
             Assert.True(returnedRes.StatusCode == 200);
             Assert.Equal(TestData.Product4.Id, returnedObj!.Id);
             Assert.Equal(TestData.Product4.Name, returnedObj.Name);
-            Assert.Equal(TestData.Product4.Price, returnedObj.Price);
         }
 
         [Theory]
