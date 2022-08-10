@@ -37,34 +37,54 @@ namespace PurchDep.Interfaces.Mapping
             return result;
         }
 
-        public Task<StocksProductDom> MapAsync(StocksProductDal item, CancellationToken cancel = default)
+        public async Task<StocksProductDom> MapAsync(StocksProductDal item, CancellationToken cancel = default)
         {
-            throw new NotImplementedException();
+            if (item is null) return null!;
+            var itemTask = Task.Factory.StartNew(() => Map(item), cancel);
+            return await itemTask;
         }
 
-        public Task<StocksProductDal> MapAsync(StocksProductDom item, CancellationToken cancel = default)
+        public async Task<StocksProductDal> MapAsync(StocksProductDom item, CancellationToken cancel = default)
         {
-            throw new NotImplementedException();
+            if (item is null) return null!;
+            var itemTask = Task.Factory.StartNew(() => Map(item), cancel);
+            return await itemTask;
         }
 
         public ICollection<StocksProductDom> MapRange(ICollection<StocksProductDal> items)
         {
-            throw new NotImplementedException();
+            if (items is null) return null!;
+            var products = new List<StocksProductDom>();
+            foreach (var item in items)
+            {
+                products.Add(Map(item));
+            }
+            return products;
         }
 
         public ICollection<StocksProductDal> MapRange(ICollection<StocksProductDom> items)
         {
-            throw new NotImplementedException();
+            if (items is null) return null!;
+            var products = new List<StocksProductDal>();
+            foreach (var item in items)
+            {
+                products.Add(Map(item));
+            }
+            return products;
         }
 
-        public Task<ICollection<StocksProductDom>> MapRangeAsync(ICollection<StocksProductDal> items, CancellationToken cancel = default)
+        public async Task<ICollection<StocksProductDom>> MapRangeAsync(ICollection<StocksProductDal> items, CancellationToken cancel = default)
         {
-            throw new NotImplementedException();
+            if (items is null) return null!;
+            var itemsTask = Task.Factory.StartNew(() => MapRange(items), cancel);
+            return await itemsTask;
         }
 
-        public Task<ICollection<StocksProductDal>> MapRangeAsync(ICollection<StocksProductDom> items, CancellationToken cancel = default)
+        public async Task<ICollection<StocksProductDal>> MapRangeAsync(ICollection<StocksProductDom> items, CancellationToken cancel = default)
         {
-            throw new NotImplementedException();
+            if (items is null) return null!;
+            var itemsTask = Task.Factory.StartNew(() => MapRange(items), cancel);
+            return await itemsTask;
         }
     }
 }

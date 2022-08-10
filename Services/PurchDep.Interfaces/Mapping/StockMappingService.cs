@@ -49,16 +49,16 @@ namespace PurchDep.Interfaces.Mapping
                 Name = item.Name,
             };
 
-            foreach (var product in item.StocksProducts)
+            foreach (StocksProductDom product in item.StocksProducts)
             {
-                result.StocksProducts.Add(new()
-                {
-                    ProductId = product.Id,
-                    StockId = product.StockId,
-                    Quantity = product.Quantity,
-                    SupplierId = product.SupplierId,
-                });
-                result.StocksProducts.Add(_stockProductMapper.Map(null));
+                //result.StocksProducts.Add(new()
+                //{
+                //    ProductId = product.Id,
+                //    StockId = product.StockId,
+                //    Quantity = product.Quantity,
+                //    SupplierId = product.SupplierId,
+                //});
+                result.StocksProducts.Add(_stockProductMapper.Map(product));
             }
             return result;
         }
