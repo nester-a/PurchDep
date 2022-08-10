@@ -10,7 +10,7 @@ namespace PurchDep.Dal.InMemory.DependencyInjection
             services.AddDbContext<PurchDepContext>(opt =>
             {
                 opt.UseInMemoryDatabase(dbName);
-            });
+            }, ServiceLifetime.Singleton);
 
             return services;
         }
