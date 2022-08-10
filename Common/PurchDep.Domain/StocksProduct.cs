@@ -7,9 +7,6 @@
         /// <summary>Products quantity</summary>
         public int Quantity { get; set; }
 
-        /// <summary>The Id of the supplier from whom this product was purchased</summary>
-        public TKey SupplierId { get; set; } = default(TKey)!;
-
         /// <summary>The Id of the stock where this product is stored</summary>
         public TKey StockId { get; set; } = default(TKey)!;
     }
