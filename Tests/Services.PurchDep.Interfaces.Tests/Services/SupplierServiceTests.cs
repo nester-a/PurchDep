@@ -48,7 +48,7 @@ namespace Services.PurchDep.Interfaces.Tests.Services
             bool cathced = false;
             try
             {
-                _service.Add(null);
+                _service.Add(null!);
             }
             catch (ArgumentNullException e)
             {
@@ -91,7 +91,7 @@ namespace Services.PurchDep.Interfaces.Tests.Services
             bool cathced = false;
             try
             {
-                await _service.AddAsync(null);
+                await _service.AddAsync(null!);
             }
             catch (ArgumentNullException e)
             {
@@ -187,7 +187,7 @@ namespace Services.PurchDep.Interfaces.Tests.Services
             Assert.NotNull(res);
             Assert.Equal(ServicesTestData.Supplier1.Id, res.Id);
             Assert.Equal(ServicesTestData.Supplier1.Name, res.Name);
-            Assert.Equal(ServicesTestData.Supplier1.Products.Count, res.Products.Count);
+            Assert.Equal(ServicesTestData.Supplier1.SuppliersProducts.Count, res.SuppliersProducts.Count);
         }
 
         [Theory]
@@ -219,7 +219,7 @@ namespace Services.PurchDep.Interfaces.Tests.Services
             Assert.NotNull(res);
             Assert.Equal(ServicesTestData.Supplier2.Id, res.Id);
             Assert.Equal(ServicesTestData.Supplier2.Name, res.Name);
-            Assert.Equal(ServicesTestData.Supplier2.Products.Count, res.Products.Count);
+            Assert.Equal(ServicesTestData.Supplier2.SuppliersProducts.Count, res.SuppliersProducts.Count);
         }
 
         [Theory]
@@ -272,7 +272,7 @@ namespace Services.PurchDep.Interfaces.Tests.Services
             Assert.Equal(ServicesTestData.Supplier1.Id, res.Id);
             Assert.Equal(ServicesTestData.Supplier1.Name, res.Name);
             Assert.Equal(ServicesTestData.Supplier1.Name, newName);
-            Assert.Equal(ServicesTestData.Supplier1.Products.Count, res.Products.Count);
+            Assert.Equal(ServicesTestData.Supplier1.SuppliersProducts.Count, res.SuppliersProducts.Count);
         }
 
         [Theory]
@@ -302,7 +302,7 @@ namespace Services.PurchDep.Interfaces.Tests.Services
 
             try
             {
-                _service.Update(id, null);
+                _service.Update(id, null!);
             }
             catch (ArgumentNullException e)
             {
@@ -322,7 +322,7 @@ namespace Services.PurchDep.Interfaces.Tests.Services
             Assert.Equal(ServicesTestData.Supplier2.Id, res.Id);
             Assert.Equal(ServicesTestData.Supplier2.Name, res.Name);
             Assert.Equal(ServicesTestData.Supplier2.Name, newName);
-            Assert.Equal(ServicesTestData.Supplier2.Products.Count, res.Products.Count);
+            Assert.Equal(ServicesTestData.Supplier2.SuppliersProducts.Count, res.SuppliersProducts.Count);
         }
 
         [Theory]
@@ -352,7 +352,7 @@ namespace Services.PurchDep.Interfaces.Tests.Services
 
             try
             {
-                await _service.UpdateAsync(id, null);
+                await _service.UpdateAsync(id, null!);
             }
             catch (ArgumentNullException e)
             {

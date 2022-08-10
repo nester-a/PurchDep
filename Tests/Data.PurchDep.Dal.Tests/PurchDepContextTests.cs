@@ -39,8 +39,8 @@ namespace Data.PurchDep.Dal.Tests
             {
                 Assert.Equal(i, suppliers[i - 1].Id);
                 Assert.True(suppliers.Any());
-                if(i == 1) Assert.Single(suppliers[i - 1].Products);
-                if(i == 2) Assert.Equal(2, suppliers[i - 1].Products.Count());
+                if(i == 1) Assert.Single(suppliers[i - 1].SuppliersProducts);
+                if(i == 2) Assert.Equal(2, suppliers[i - 1].SuppliersProducts.Count());
             }
         }
     }

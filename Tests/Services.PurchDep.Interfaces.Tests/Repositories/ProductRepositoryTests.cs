@@ -178,7 +178,6 @@ namespace Services.PurchDep.Interfaces.Tests.Repositories
             Assert.NotNull(res);
             Assert.Equal(RepoTestData.Product1.Id, res.Id);
             Assert.Equal(RepoTestData.Product1.Name, res.Name);
-            Assert.Equal(RepoTestData.Product1.Price, res.Price);
         }
 
         [Theory]
@@ -210,7 +209,6 @@ namespace Services.PurchDep.Interfaces.Tests.Repositories
             Assert.NotNull(res);
             Assert.Equal(RepoTestData.Product2.Id, res.Id);
             Assert.Equal(RepoTestData.Product2.Name, res.Name);
-            Assert.Equal(RepoTestData.Product2.Price, res.Price);
         }
 
         [Theory]
@@ -263,7 +261,6 @@ namespace Services.PurchDep.Interfaces.Tests.Repositories
             Assert.Equal(RepoTestData.Product1.Id, res.Id);
             Assert.Equal(RepoTestData.Product1.Name, res.Name);
             Assert.Equal(RepoTestData.Product1.Name, newName);
-            Assert.Equal(RepoTestData.Product1.Price, res.Price);
         }
 
         [Theory]
@@ -313,7 +310,6 @@ namespace Services.PurchDep.Interfaces.Tests.Repositories
             Assert.Equal(RepoTestData.Product2.Id, res.Id);
             Assert.Equal(RepoTestData.Product2.Name, res.Name);
             Assert.Equal(RepoTestData.Product2.Name, newName);
-            Assert.Equal(RepoTestData.Product2.Price, res.Price);
         }
 
         [Theory]

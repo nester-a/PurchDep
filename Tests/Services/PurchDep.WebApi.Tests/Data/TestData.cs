@@ -11,8 +11,8 @@ namespace PurchDep.WebApi.Tests.Data
     {
         public static ICollection<ProductDal> AllProducts = new List<ProductDal>();
         public static ICollection<SupplierDal> AllSuppliers = new List<SupplierDal>();
-        public static ProductDal Product1 { get; } = new ProductDal() { Name = "Product_1", Price = 1.11m, };
-        public static ProductDal Product2 { get; } = new ProductDal() { Name = "Product_2", Price = 2.22m, };
+        public static ProductDal Product1 { get; } = new ProductDal() { Name = "Product_1", };
+        public static ProductDal Product2 { get; } = new ProductDal() { Name = "Product_2", };
         public static ProductDom Product3 { get; } = new ProductDom() { Name = "Product_3", };
         public static ProductDom Product33 { get; } = new ProductDom() { Name = "Product_33", };
         public static ProductDom Product4 { get; } = new ProductDom() { Name = "Product_4", };
@@ -32,12 +32,6 @@ namespace PurchDep.WebApi.Tests.Data
             AllProducts.Add(Product1);
             AllProducts.Add(Product2);
 
-            Supplier1.Products.Add(Product1);
-            Supplier2.Products.Add(Product2);
-            Supplier3.Products.Add(Product33);
-            Supplier4.Products.Add(Product44);
-            Supplier5.Products.Add(Product55);
-            Supplier6.Products.Add(Product66);
 
             AllSuppliers.Add(Supplier1);
             AllSuppliers.Add(Supplier2);
