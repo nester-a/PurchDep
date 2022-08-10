@@ -1,5 +1,4 @@
 ﻿using PurchDep.Dal.Entities;
-using PurchDep.Domain.Base;
 using PurchDep.Interfaces.Base.Mapping;
 
 using SupplierDom = PurchDep.Domain.Supplier;

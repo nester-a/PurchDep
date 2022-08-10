@@ -1,37 +1,34 @@
 ﻿using PurchDep.Interfaces.Base.Mapping;
-using StocksProductDal = PurchDep.Dal.Entities.StocksProduct;
-using StocksProductDom = PurchDep.Domain.StocksProduct;
+using SuppliersProductDal = PurchDep.Dal.Entities.SuppliersProduct;
+using SuppliersProductDom = PurchDep.Domain.SuppliersProduct;
 
 namespace PurchDep.Interfaces.Mapping
 {
-    public class StocksProductMappingService : MappingService<StocksProductDal, StocksProductDom>
+    public class SuppliersProductMappingService : MappingService<SuppliersProductDal, SuppliersProductDom>
     {
-        public override StocksProductDom Map(StocksProductDal item)
+        public override SuppliersProductDom Map(SuppliersProductDal item)
         {
             if (item is null) return null!;
             var currentSuppliersProduct = item.Supplier.SuppliersProducts.FirstOrDefault(p => p.SupplierId == item.SupplierId);
-            var result = new StocksProductDom()
+            var result = new SuppliersProductDom()
             {
                 Id = item.ProductId,
                 Name = item.Product.Name,
-                Quantity = item.Quantity,
-                SupplierId = item.SupplierId,
                 SuppliersPrice = currentSuppliersProduct!.Price,
-                StockId = item.StockId,
+                SupplierId = item.SupplierId,
             };
 
             return result;
         }
 
-        public override StocksProductDal Map(StocksProductDom item)
+        public override SuppliersProductDal Map(SuppliersProductDom item)
         {
             if (item is null) return null!;
-            var result = new StocksProductDal()
+            var result = new SuppliersProductDal()
             {
                 ProductId = item.Id,
-                StockId = item.StockId,
-                Quantity = item.Quantity,
                 SupplierId = item.SupplierId,
+                Price = item.SuppliersPrice,
             };
 
             return result;

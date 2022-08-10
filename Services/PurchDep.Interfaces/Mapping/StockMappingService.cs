@@ -6,15 +6,15 @@ using StocksProductDom = PurchDep.Domain.StocksProduct;
 
 namespace PurchDep.Interfaces.Mapping
 {
-    public class StockMappingService : IMappingService<StockDal, StockDom>
+    public class StockMappingService : MappingService<StockDal, StockDom>
     {
-        private readonly IMappingService<StocksProductDal, StocksProductDom> _stockProductMapper;
+        private readonly MappingService<StocksProductDal, StocksProductDom> _stockProductMapper;
 
-        public StockMappingService(IMappingService<StocksProductDal, StocksProductDom> stockProductMapper)
+        public StockMappingService(MappingService<StocksProductDal, StocksProductDom> stockProductMapper)
         {
             _stockProductMapper = stockProductMapper;
         }
-        public StockDom Map(StockDal item)
+        public override StockDom Map(StockDal item)
         {
             if (item is null) return null!;
             var result = new StockDom()
@@ -40,7 +40,7 @@ namespace PurchDep.Interfaces.Mapping
             return result;
         }
 
-        public StockDal Map(StockDom item)
+        public override StockDal Map(StockDom item)
         {
             if (item is null) return null!;
             var result = new StockDal()
@@ -63,54 +63,5 @@ namespace PurchDep.Interfaces.Mapping
             return result;
         }
 
-        public async Task<StockDom> MapAsync(StockDal item, CancellationToken cancel = default)
-        {
-            if (item is null) return null!;
-            var itemTask = Task.Factory.StartNew(() => Map(item), cancel);
-            return await itemTask;
-        }
-
-        public async Task<StockDal> MapAsync(StockDom item, CancellationToken cancel = default)
-        {
-            if (item is null) return null!;
-            var itemTask = Task.Factory.StartNew(() => Map(item), cancel);
-            return await itemTask;
-        }
-
-        public ICollection<StockDom> MapRange(ICollection<StockDal> items)
-        {
-            if (items is null) return null!;
-            var products = new List<StockDom>();
-            foreach (var item in items)
-            {
-                products.Add(Map(item));
-            }
-            return products;
-        }
-
-        public ICollection<StockDal> MapRange(ICollection<StockDom> items)
-        {
-            if (items is null) return null!;
-            var products = new List<StockDal>();
-            foreach (var item in items)
-            {
-                products.Add(Map(item));
-            }
-            return products;
-        }
-
-        public async Task<ICollection<StockDom>> MapRangeAsync(ICollection<StockDal> items, CancellationToken cancel = default)
-        {
-            if (items is null) return null!;
-            var itemsTask = Task.Factory.StartNew(() => MapRange(items), cancel);
-            return await itemsTask;
-        }
-
-        public async Task<ICollection<StockDal>> MapRangeAsync(ICollection<StockDom> items, CancellationToken cancel = default)
-        {
-            if (items is null) return null!;
-            var itemsTask = Task.Factory.StartNew(() => MapRange(items), cancel);
-            return await itemsTask;
-        }
     }
 }
