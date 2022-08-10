@@ -1,10 +1,10 @@
 ﻿namespace PurchDep.Domain
 {
-    public class Product<T>
+    public class Stock<T>
     {
         public T Id { get; set; } = default(T)!;
         public string Name { get; set; } = string.Empty;
-        public decimal Price { get; set; }
+        public HashSet<StocksProduct<T>> StocksProducts { get; set; } = new();
     }
-    public class Product : Product<int> { }
+    public class Stock : Stock<int> { }
 }
