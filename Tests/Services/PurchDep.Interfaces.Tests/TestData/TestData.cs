@@ -41,6 +41,56 @@ namespace PurchDep.Interfaces.Tests.TestData
         {
             Name = "ProductDal_ForDeletingAsync",
         };
+        public static SupplierDal SupplierDal_1 { get; } = new()
+        {
+            Name = "SupplierDal_1",
+        };
+        public static SupplierDal SupplierDal_ForAdding { get; } = new()
+        {
+            Name = "SupplierDal_ForAdding",
+        };
+        public static SupplierDal SupplierDal_ForAddingAsync { get; } = new()
+        {
+            Name = "SupplierDal_ForAddingAsync",
+        };
+        public static SupplierDal SupplierDal_ForUpdating { get; } = new()
+        {
+            Name = "SupplierDal_ForUpdating",
+        };
+        public static SupplierDal SupplierDal_ForUpdatingAsync { get; } = new()
+        {
+            Name = "SupplierDal_ForUpdatingAsync",
+        };
+        public static SupplierDal SupplierDal_ForDeleting { get; } = new()
+        {
+            Name = "SupplierDal_ForDeleting",
+        };
+        public static SupplierDal SupplierDal_ForDeletingAsync { get; } = new()
+        {
+            Name = "SupplierDal_ForDeletingAsync",
+        };
+        public static SuppliersProductDal SuppliersProductDal_1 { get; } = new()
+        {
+            Price = 10m,
+            Product = ProductDal_1,
+            ProductId = ProductDal_1.Id,
+            Supplier = SupplierDal_1,
+            SupplierId = SupplierDal_1.Id,
+        };
+        public static StockDal StockDal_1 { get; } = new()
+        {
+            Name = "StockDal_1",
+        };
+        public static StocksProductDal StocksProductDal_1 { get; } = new()
+        {
+            Product = ProductDal_1,
+            ProductId = ProductDal_1.Id,
+            Supplier = SupplierDal_1,
+            SupplierId = SupplierDal_1.Id,
+            Stock = StockDal_1,
+            StockId = StockDal_1.Id,
+            Quantity = 10,
+        };
         public static ProductDom ProductDom_1 { get; } = new()
         {
             Name = "ProductDal_1",
@@ -58,18 +108,7 @@ namespace PurchDep.Interfaces.Tests.TestData
             Name = "ProductDom_ForDeleting",
         };
 
-        public static SupplierDal SupplierDal_1 { get; } = new()
-        {
-            Name = "SupplierDal_1",
-        };
-        public static SuppliersProductDal SuppliersProductDal_1 { get; } = new()
-        {
-            Price = 10m,
-            Product = ProductDal_1,
-            ProductId = ProductDal_1.Id,
-            Supplier = SupplierDal_1,
-            SupplierId = SupplierDal_1.Id,
-        };
+
 
         public static SupplierDom SupplierDom_1 { get; } = new()
         {
@@ -82,20 +121,6 @@ namespace PurchDep.Interfaces.Tests.TestData
             SupplierId = SupplierDom_1.Id,
         };
 
-        public static StockDal StockDal_1 { get; } = new()
-        {
-            Name = "StockDal_1",
-        };
-        public static StocksProductDal StocksProductDal_1 { get; } = new()
-        {
-            Product = ProductDal_1,
-            ProductId = ProductDal_1.Id,
-            Supplier = SupplierDal_1,
-            SupplierId = SupplierDal_1.Id,
-            Stock = StockDal_1,
-            StockId = StockDal_1.Id,
-            Quantity = 10,
-        };
 
         public static StockDom StockDom_1 { get; } = new()
         {
