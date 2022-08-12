@@ -17,9 +17,45 @@ namespace PurchDep.Interfaces.Tests.TestData
         {
             Name = "ProductDal_1",
         };
+        public static ProductDal ProductDal_ForAdding { get; } = new()
+        {
+            Name = "ProductDal_ForAdding",
+        };
+        public static ProductDal ProductDal_ForAddingAsync { get; } = new()
+        {
+            Name = "ProductDal_ForAddingAsync",
+        };
+        public static ProductDal ProductDal_ForUpdating { get; } = new()
+        {
+            Name = "ProductDal_ForUpdating",
+        };
+        public static ProductDal ProductDal_ForUpdatingAsync { get; } = new()
+        {
+            Name = "ProductDal_ForUpdatingAsync",
+        };
+        public static ProductDal ProductDal_ForDeleting { get; } = new()
+        {
+            Name = "ProductDal_ForDeleting",
+        };
+        public static ProductDal ProductDal_ForDeletingAsync { get; } = new()
+        {
+            Name = "ProductDal_ForDeletingAsync",
+        };
         public static ProductDom ProductDom_1 { get; } = new()
         {
             Name = "ProductDal_1",
+        };
+        public static ProductDom ProductDom_ForAdding { get; } = new()
+        {
+            Name = "ProductDal_ForAdding",
+        };
+        public static ProductDom ProductDom_ForUpdating { get; } = new()
+        {
+            Name = "ProductDom_ForUpdating",
+        };
+        public static ProductDom ProductDom_ForDeleting { get; } = new()
+        {
+            Name = "ProductDom_ForDeleting",
         };
 
         public static SupplierDal SupplierDal_1 { get; } = new()
