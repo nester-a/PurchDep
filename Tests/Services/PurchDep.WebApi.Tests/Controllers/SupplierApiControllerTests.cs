@@ -21,7 +21,7 @@ namespace PurchDep.WebApi.Tests.Controllers
         {
             _fixture = fixture;
             var repo = new SupplierRepository(_fixture.Db);
-            var mapper = new SupplierMappingService();
+            var mapper = new SupplierMappingService(new SuppliersProductMappingService());
             var service = new SupplierService(repo, mapper);
 
             _controller = new SupplierApiController(service);

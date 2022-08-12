@@ -26,7 +26,7 @@ namespace Services.PurchDep.Interfaces.Tests.Services
         {
             _fixture = fixture;
             var repo = new SupplierRepository(_fixture.Db);
-            _mapper = new SupplierMappingService();
+            _mapper = new SupplierMappingService(new SuppliersProductMappingService());
             _service = new SupplierService(repo, _mapper);
         }
 
