@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using ProductDal = PurchDep.Dal.Entities.Product;
+﻿using ProductDal = PurchDep.Dal.Entities.Product;
 using SuppliersProductDal = PurchDep.Dal.Entities.SuppliersProduct;
 using StocksProductDal = PurchDep.Dal.Entities.StocksProduct;
 using SupplierDal = PurchDep.Dal.Entities.Supplier;
@@ -27,5 +21,35 @@ namespace PurchDep.Interfaces.Tests.TestData
         {
             Name = "ProductDal_1",
         };
+
+        public static SupplierDal SupplierDal_1 { get; } = new()
+        {
+            Name = "SupplierDal_1",
+        };
+        public static SuppliersProductDal SuppliersProductDal_1 { get; } = new()
+        {
+            Price = 10m,
+            Product = ProductDal_1,
+            ProductId = ProductDal_1.Id,
+            Supplier = SupplierDal_1,
+            SupplierId = SupplierDal_1.Id,
+        };
+
+        public static SupplierDom SupplierDom_1 { get; } = new()
+        {
+            Name = "SupplierDom_1",
+        };
+        public static SuppliersProductDom SuppliersProductDom_1 { get; } = new()
+        {
+            Id = ProductDom_1.Id,
+            Name = ProductDom_1.Name,
+            SupplierId = SupplierDom_1.Id,
+        };
+
+        static TestData()
+        {
+            SupplierDal_1.SuppliersProducts.Add(SuppliersProductDal_1);
+            SupplierDom_1.SuppliersProducts.Add(SuppliersProductDom_1);
+        }
     }
 }

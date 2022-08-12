@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PurchDep.Interfaces.Base.Mapping
+﻿namespace PurchDep.Interfaces.Base.Mapping
 {
     public abstract class MappingService<TSource, TResult> : IMappingService<TSource, TResult> where TSource : class where TResult : class
     {
