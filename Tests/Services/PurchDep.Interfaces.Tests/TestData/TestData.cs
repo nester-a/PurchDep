@@ -81,6 +81,30 @@ namespace PurchDep.Interfaces.Tests.TestData
         {
             Name = "StockDal_1",
         };
+        public static StockDal StockDal_ForAdding { get; } = new()
+        {
+            Name = "StockDal_ForAdding",
+        };
+        public static StockDal StockDal_ForAddingAsync { get; } = new()
+        {
+            Name = "StockDal_ForAddingAsync",
+        };
+        public static StockDal StockDal_ForDeleting { get; } = new()
+        {
+            Name = "StockDal_ForDeleting",
+        };
+        public static StockDal StockDal_ForDeletingAsync { get; } = new()
+        {
+            Name = "StockDal_ForDeletingAsync",
+        };
+        public static StockDal StockDal_ForUpdating { get; } = new()
+        {
+            Name = "StockDal_ForUpdating",
+        };
+        public static StockDal StockDal_ForUpdatingAsync { get; } = new()
+        {
+            Name = "StockDal_ForUpdatingAsync",
+        };
         public static StocksProductDal StocksProductDal_1 { get; } = new()
         {
             Product = ProductDal_1,
