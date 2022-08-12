@@ -25,16 +25,9 @@ namespace PurchDep.Interfaces.Mapping
 
             foreach (var product in item.StocksProducts)
             {
-                //var currentSuppliersProduct = product.Supplier.SuppliersProducts.FirstOrDefault(p => p.SupplierId == product.SupplierId);
-                //result.StocksProducts.Add(new()
-                //{
-                //    Id = product.ProductId,
-                //    Name = product.Product.Name,
-                //    Quantity = product.Quantity,
-                //    SuppliersPrice = currentSuppliersProduct!.Price,
-                //    SuppliersId = product.SupplierId,
-                //});
-                result.StocksProducts.Add(_stockProductMapper.Map(product));
+                if (product is null) continue;
+                var productDom = _stockProductMapper.Map(product);
+                result.StocksProducts.Add(productDom);
             }
 
             return result;
@@ -51,14 +44,9 @@ namespace PurchDep.Interfaces.Mapping
 
             foreach (StocksProductDom product in item.StocksProducts)
             {
-                //result.StocksProducts.Add(new()
-                //{
-                //    ProductId = product.Id,
-                //    StockId = product.StockId,
-                //    Quantity = product.Quantity,
-                //    SupplierId = product.SupplierId,
-                //});
-                result.StocksProducts.Add(_stockProductMapper.Map(product));
+                if (product is null) continue;
+                var productDal = _stockProductMapper.Map(product);
+                result.StocksProducts.Add(productDal);
             }
             return result;
         }
