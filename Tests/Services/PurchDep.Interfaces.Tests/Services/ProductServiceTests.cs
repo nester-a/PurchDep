@@ -4,7 +4,6 @@ using PurchDep.Interfaces.Repositories;
 using PurchDep.Interfaces.Services;
 using PurchDep.Interfaces.Tests.Services.Fixtures;
 using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Xunit;
