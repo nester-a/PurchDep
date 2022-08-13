@@ -19,17 +19,17 @@ var configuration = builder.Configuration;
 // Add services to the container.
 //вы€влен баг, неподключаетс€ база данных
 builder.Services.AddAppContext(configuration);
-builder.Services.AddScoped<IMappingService<Product, ProductDom>, ProductMappingService>();
-builder.Services.AddScoped<IMappingService<SuppliersProduct, SuppliersProductDom>, SuppliersProductMappingService>();
-builder.Services.AddScoped<IMappingService<StocksProduct, StocksProductDom>, StocksProductMappingService>();
-builder.Services.AddScoped<IMappingService<Supplier, SupplierDom>, SupplierMappingService>();
-builder.Services.AddScoped<IMappingService<Stock, StockDom>, StockMappingService>();
-builder.Services.AddScoped<Repository<Product>, ProductRepository>();
-builder.Services.AddScoped<Repository<Supplier>, SupplierRepository>();
-builder.Services.AddScoped<Repository<Stock>, StockRepository>();
-builder.Services.AddScoped<Service<Product, ProductDom>, ProductService>();
-builder.Services.AddScoped<Service<Supplier, SupplierDom>, SupplierService>();
-builder.Services.AddScoped<Service<Stock, StockDom>, StockService>();
+builder.Services.AddTransient<IMappingService<Product, ProductDom>, ProductMappingService>();
+builder.Services.AddTransient<IMappingService<SuppliersProduct, SuppliersProductDom>, SuppliersProductMappingService>();
+builder.Services.AddTransient<IMappingService<StocksProduct, StocksProductDom>, StocksProductMappingService>();
+builder.Services.AddTransient<IMappingService<Supplier, SupplierDom>, SupplierMappingService>();
+builder.Services.AddTransient<IMappingService<Stock, StockDom>, StockMappingService>();
+builder.Services.AddTransient<Repository<Product>, ProductRepository>();
+builder.Services.AddTransient<Repository<Supplier>, SupplierRepository>();
+builder.Services.AddTransient<Repository<Stock>, StockRepository>();
+builder.Services.AddTransient<Service<Product, ProductDom>, ProductService>();
+builder.Services.AddTransient<Service<Supplier, SupplierDom>, SupplierService>();
+builder.Services.AddTransient<Service<Stock, StockDom>, StockService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
