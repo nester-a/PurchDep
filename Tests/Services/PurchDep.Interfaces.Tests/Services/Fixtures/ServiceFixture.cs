@@ -52,10 +52,7 @@ namespace PurchDep.Interfaces.Tests.Services.Fixtures
             ProductRepositoryMock = new Mock<ProductRepository>(PurchDepContextMockObject);
             ProductRepositoryMock.Setup(o => o.GetAll()).Returns(Products);
             ProductRepositoryMock.Setup(o => o.Get(It.IsAny<int>())).Returns(new ProductDal() { Id = 1, Name = "Getted_FromMockRepository_ProductObj" });
-            ProductRepositoryMock.Setup(o => o.Delete(It.IsAny<int>())).Returns(new ProductDal() { Id = 1, Name = "Deleted_FromMockRepository_ProductObj" });
             ProductRepositoryMock.Setup(o => o.Update(It.IsAny<int>(), It.IsAny<ProductDal>())).Returns(new ProductDal() { Id = 1, Name = "Updated_FromMockRepository_ProductObj" });
-            ProductRepositoryMock.Setup(o => o.Add(null!)).Throws(new ArgumentNullException());
-            ProductRepositoryMock.Setup(o => o.Add(It.IsAny<ProductDal>())).Returns(new ProductDal() { Id = 1, Name = "Added_FromMockRepository_ProductObj" });
             ProductRepositoryMockObject = ProductRepositoryMock.Object;
 
             SupplierRepositoryMock = new Mock<SupplierRepository>(PurchDepContextMockObject);
@@ -75,12 +72,6 @@ namespace PurchDep.Interfaces.Tests.Services.Fixtures
             StockRepositoryMockObject = StockRepositoryMock.Object;
 
             ProductMappingServiceMock = new Mock<ProductMappingService>();
-            ProductDal nullDal = null!;
-            ProductDom nullDom = null!;
-            ProductMappingServiceMock.Setup(o => o.Map(It.IsAny<ProductDal>())).Returns(new ProductDom() { Id = 1, Name = "Mapped_FromMockMapper_ProductDomObj" });
-            ProductMappingServiceMock.Setup(o => o.Map(nullDal)).Returns(nullDom);
-            ProductMappingServiceMock.Setup(o => o.Map(It.IsAny<ProductDom>())).Returns(new ProductDal() { Id = 1, Name = "Mapped_FromMockMapper_ProductDalObj" });
-            ProductMappingServiceMockObject = ProductMappingServiceMock.Object;
 
             var SuppliersProductMappingServiceMockObject = new Mock<SuppliersProductMappingService>().Object;
 
