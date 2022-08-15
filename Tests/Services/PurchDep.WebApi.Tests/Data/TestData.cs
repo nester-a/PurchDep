@@ -15,6 +15,7 @@ namespace PurchDep.WebApi.Tests.Data
     public static class TestData
     {
         public static ICollection<ProductDom> ProductsDom { get; } = new List<ProductDom>();
+        public static ICollection<SupplierDom> SuppliersDom { get; } = new List<SupplierDom>();
         public static ProductDal ProductDal_1 { get; } = new()
         {
             Name = "ProductDal_1",
@@ -137,6 +138,18 @@ namespace PurchDep.WebApi.Tests.Data
         {
             Name = "SupplierDom_1",
         };
+        public static SupplierDom SupplierDom_ForAdding { get; } = new()
+        {
+            Name = "SupplierDom_ForAdding",
+        };
+        public static SupplierDom SupplierDom_ForUpdating { get; } = new()
+        {
+            Name = "SupplierDom_ForUpdating",
+        };
+        public static SupplierDom SupplierDom_ForDeleting { get; } = new()
+        {
+            Name = "SupplierDom_ForDeleting",
+        };
         public static SuppliersProductDom SuppliersProductDom_1 { get; } = new()
         {
             Id = ProductDom_1.Id,
@@ -166,6 +179,7 @@ namespace PurchDep.WebApi.Tests.Data
             StockDom_1.StocksProducts.Add(StocksProductDom_1);
 
             ProductsDom.Add(ProductDom_1);
+            SuppliersDom.Add(SupplierDom_1);
         }
     }
 }
