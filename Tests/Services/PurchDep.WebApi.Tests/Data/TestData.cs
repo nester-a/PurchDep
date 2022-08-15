@@ -16,61 +16,14 @@ namespace PurchDep.WebApi.Tests.Data
     {
         public static ICollection<ProductDom> ProductsDom { get; } = new List<ProductDom>();
         public static ICollection<SupplierDom> SuppliersDom { get; } = new List<SupplierDom>();
+        public static ICollection<StockDom> StocksDom { get; } = new List<StockDom>();
         public static ProductDal ProductDal_1 { get; } = new()
         {
             Name = "ProductDal_1",
         };
-        public static ProductDal ProductDal_ForAdding { get; } = new()
-        {
-            Name = "ProductDal_ForAdding",
-        };
-        public static ProductDal ProductDal_ForAddingAsync { get; } = new()
-        {
-            Name = "ProductDal_ForAddingAsync",
-        };
-        public static ProductDal ProductDal_ForUpdating { get; } = new()
-        {
-            Name = "ProductDal_ForUpdating",
-        };
-        public static ProductDal ProductDal_ForUpdatingAsync { get; } = new()
-        {
-            Name = "ProductDal_ForUpdatingAsync",
-        };
-        public static ProductDal ProductDal_ForDeleting { get; } = new()
-        {
-            Name = "ProductDal_ForDeleting",
-        };
-        public static ProductDal ProductDal_ForDeletingAsync { get; } = new()
-        {
-            Name = "ProductDal_ForDeletingAsync",
-        };
         public static SupplierDal SupplierDal_1 { get; } = new()
         {
             Name = "SupplierDal_1",
-        };
-        public static SupplierDal SupplierDal_ForAdding { get; } = new()
-        {
-            Name = "SupplierDal_ForAdding",
-        };
-        public static SupplierDal SupplierDal_ForAddingAsync { get; } = new()
-        {
-            Name = "SupplierDal_ForAddingAsync",
-        };
-        public static SupplierDal SupplierDal_ForUpdating { get; } = new()
-        {
-            Name = "SupplierDal_ForUpdating",
-        };
-        public static SupplierDal SupplierDal_ForUpdatingAsync { get; } = new()
-        {
-            Name = "SupplierDal_ForUpdatingAsync",
-        };
-        public static SupplierDal SupplierDal_ForDeleting { get; } = new()
-        {
-            Name = "SupplierDal_ForDeleting",
-        };
-        public static SupplierDal SupplierDal_ForDeletingAsync { get; } = new()
-        {
-            Name = "SupplierDal_ForDeletingAsync",
         };
         public static SuppliersProductDal SuppliersProductDal_1 { get; } = new()
         {
@@ -83,30 +36,6 @@ namespace PurchDep.WebApi.Tests.Data
         public static StockDal StockDal_1 { get; } = new()
         {
             Name = "StockDal_1",
-        };
-        public static StockDal StockDal_ForAdding { get; } = new()
-        {
-            Name = "StockDal_ForAdding",
-        };
-        public static StockDal StockDal_ForAddingAsync { get; } = new()
-        {
-            Name = "StockDal_ForAddingAsync",
-        };
-        public static StockDal StockDal_ForDeleting { get; } = new()
-        {
-            Name = "StockDal_ForDeleting",
-        };
-        public static StockDal StockDal_ForDeletingAsync { get; } = new()
-        {
-            Name = "StockDal_ForDeletingAsync",
-        };
-        public static StockDal StockDal_ForUpdating { get; } = new()
-        {
-            Name = "StockDal_ForUpdating",
-        };
-        public static StockDal StockDal_ForUpdatingAsync { get; } = new()
-        {
-            Name = "StockDal_ForUpdatingAsync",
         };
         public static StocksProductDal StocksProductDal_1 { get; } = new()
         {
@@ -160,6 +89,18 @@ namespace PurchDep.WebApi.Tests.Data
         {
             Name = "StockDom_1",
         };
+        public static StockDom StockDom_ForAdding { get; } = new()
+        {
+            Name = "StockDom_ForAdding",
+        };
+        public static StockDom StockDom_ForUpdating { get; } = new()
+        {
+            Name = "StockDom_ForUpdating",
+        };
+        public static StockDom StockDom_ForDeleting { get; } = new()
+        {
+            Name = "StockDom_ForDeleting",
+        };
         public static StocksProductDom StocksProductDom_1 { get; } = new()
         {
             Id = ProductDom_1.Id,
@@ -180,6 +121,7 @@ namespace PurchDep.WebApi.Tests.Data
 
             ProductsDom.Add(ProductDom_1);
             SuppliersDom.Add(SupplierDom_1);
+            StocksDom.Add(StockDom_1);
         }
     }
 }
