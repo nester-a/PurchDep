@@ -8,11 +8,13 @@ using SuppliersProductDom = PurchDep.Domain.SuppliersProduct;
 using StocksProductDom = PurchDep.Domain.StocksProduct;
 using SupplierDom = PurchDep.Domain.Supplier;
 using StockDom = PurchDep.Domain.Stock;
+using System.Collections.Generic;
 
 namespace PurchDep.WebApi.Tests.Data
 {
     public static class TestData
     {
+        public static ICollection<ProductDom> ProductsDom { get; } = new List<ProductDom>();
         public static ProductDal ProductDal_1 { get; } = new()
         {
             Name = "ProductDal_1",
@@ -162,6 +164,8 @@ namespace PurchDep.WebApi.Tests.Data
 
             StockDal_1.StocksProducts.Add(StocksProductDal_1);
             StockDom_1.StocksProducts.Add(StocksProductDom_1);
+
+            ProductsDom.Add(ProductDom_1);
         }
     }
 }

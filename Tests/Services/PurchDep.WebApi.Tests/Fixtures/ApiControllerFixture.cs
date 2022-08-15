@@ -1,13 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Moq;
 using PurchDep.Dal;
-using PurchDep.Dal.Entities;
-using PurchDep.Interfaces.Base.Services;
 using PurchDep.Interfaces.Mapping;
 using PurchDep.Interfaces.Repositories;
 using PurchDep.Interfaces.Services;
-
-using ProductDom = PurchDep.Domain.Product;
 namespace PurchDep.WebApi.Tests.Fixtures
 {
     public class ApiControllerFixture
