@@ -7,7 +7,7 @@ namespace PurchDep.Interfaces.Services
 {
     public class SupplierService : Service<SupplierDal, SupplierDom>
     {
-        public SupplierService(Repository<SupplierDal> repository, IMappingService<SupplierDal, SupplierDom> mapper) : base(repository, mapper) { }
+        public SupplierService(Repository<SupplierDal> repository, MappingService<SupplierDal, SupplierDom> mapper) : base(repository, mapper) { }
 
         public override SupplierDom Add(SupplierDom item)
         {

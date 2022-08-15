@@ -19,11 +19,11 @@ var configuration = builder.Configuration;
 // Add services to the container.
 //вы€влен баг, неподключаетс€ база данных
 builder.Services.AddAppContext(configuration);
-builder.Services.AddTransient<IMappingService<Product, ProductDom>, ProductMappingService>();
-builder.Services.AddTransient<IMappingService<SuppliersProduct, SuppliersProductDom>, SuppliersProductMappingService>();
-builder.Services.AddTransient<IMappingService<StocksProduct, StocksProductDom>, StocksProductMappingService>();
-builder.Services.AddTransient<IMappingService<Supplier, SupplierDom>, SupplierMappingService>();
-builder.Services.AddTransient<IMappingService<Stock, StockDom>, StockMappingService>();
+builder.Services.AddTransient<MappingService<Product, ProductDom>, ProductMappingService>();
+builder.Services.AddTransient<MappingService<SuppliersProduct, SuppliersProductDom>, SuppliersProductMappingService>();
+builder.Services.AddTransient<MappingService<StocksProduct, StocksProductDom>, StocksProductMappingService>();
+builder.Services.AddTransient<MappingService<Supplier, SupplierDom>, SupplierMappingService>();
+builder.Services.AddTransient<MappingService<Stock, StockDom>, StockMappingService>();
 builder.Services.AddTransient<Repository<Product>, ProductRepository>();
 builder.Services.AddTransient<Repository<Supplier>, SupplierRepository>();
 builder.Services.AddTransient<Repository<Stock>, StockRepository>();

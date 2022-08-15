@@ -7,7 +7,7 @@ namespace PurchDep.Interfaces.Services
 {
     public class StockService : Service<StockDal, StockDom>
     {
-        public StockService(Repository<StockDal, int> repository, IMappingService<StockDal, StockDom> mapper) : base(repository, mapper) { }
+        public StockService(Repository<StockDal> repository, MappingService<StockDal, StockDom> mapper) : base(repository, mapper) { }
 
         public override StockDom Add(StockDom item)
         {
