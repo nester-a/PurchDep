@@ -1,40 +1,167 @@
-﻿using System.Collections.Generic;
-
-using ProductDal = PurchDep.Dal.Entities.Product;
+﻿using ProductDal = PurchDep.Dal.Entities.Product;
+using SuppliersProductDal = PurchDep.Dal.Entities.SuppliersProduct;
+using StocksProductDal = PurchDep.Dal.Entities.StocksProduct;
 using SupplierDal = PurchDep.Dal.Entities.Supplier;
+using StockDal = PurchDep.Dal.Entities.Stock;
 using ProductDom = PurchDep.Domain.Product;
+using SuppliersProductDom = PurchDep.Domain.SuppliersProduct;
+using StocksProductDom = PurchDep.Domain.StocksProduct;
 using SupplierDom = PurchDep.Domain.Supplier;
+using StockDom = PurchDep.Domain.Stock;
 
 namespace PurchDep.WebApi.Tests.Data
 {
     public static class TestData
     {
-        public static ICollection<ProductDal> AllProducts = new List<ProductDal>();
-        public static ICollection<SupplierDal> AllSuppliers = new List<SupplierDal>();
-        public static ProductDal Product1 { get; } = new ProductDal() { Name = "Product_1", };
-        public static ProductDal Product2 { get; } = new ProductDal() { Name = "Product_2", };
-        public static ProductDom Product3 { get; } = new ProductDom() { Name = "Product_3", };
-        public static ProductDom Product33 { get; } = new ProductDom() { Name = "Product_33", };
-        public static ProductDom Product4 { get; } = new ProductDom() { Name = "Product_4", };
-        public static ProductDom Product44 { get; } = new ProductDom() { Name = "Product_44", };
-        public static ProductDom Product5 { get; } = new ProductDom() { Name = "Product_5", };
-        public static ProductDom Product55 { get; } = new ProductDom() { Name = "Product_55", };
-        public static ProductDom Product6 { get; } = new ProductDom() { Name = "Product_6", };
-        public static ProductDom Product66 { get; } = new ProductDom() { Name = "Product_66", };
-        public static SupplierDal Supplier1 { get; } = new SupplierDal() { Name = "Supplier_1" };
-        public static SupplierDal Supplier2 { get; } = new SupplierDal() { Name = "Supplier_2" };
-        public static SupplierDom Supplier3 { get; } = new SupplierDom() { Name = "Supplier_3" };
-        public static SupplierDom Supplier4 { get; } = new SupplierDom() { Name = "Supplier_4" };
-        public static SupplierDom Supplier5 { get; } = new SupplierDom() { Name = "Supplier_5" };
-        public static SupplierDom Supplier6 { get; } = new SupplierDom() { Name = "Supplier_6" };
+        public static ProductDal ProductDal_1 { get; } = new()
+        {
+            Name = "ProductDal_1",
+        };
+        public static ProductDal ProductDal_ForAdding { get; } = new()
+        {
+            Name = "ProductDal_ForAdding",
+        };
+        public static ProductDal ProductDal_ForAddingAsync { get; } = new()
+        {
+            Name = "ProductDal_ForAddingAsync",
+        };
+        public static ProductDal ProductDal_ForUpdating { get; } = new()
+        {
+            Name = "ProductDal_ForUpdating",
+        };
+        public static ProductDal ProductDal_ForUpdatingAsync { get; } = new()
+        {
+            Name = "ProductDal_ForUpdatingAsync",
+        };
+        public static ProductDal ProductDal_ForDeleting { get; } = new()
+        {
+            Name = "ProductDal_ForDeleting",
+        };
+        public static ProductDal ProductDal_ForDeletingAsync { get; } = new()
+        {
+            Name = "ProductDal_ForDeletingAsync",
+        };
+        public static SupplierDal SupplierDal_1 { get; } = new()
+        {
+            Name = "SupplierDal_1",
+        };
+        public static SupplierDal SupplierDal_ForAdding { get; } = new()
+        {
+            Name = "SupplierDal_ForAdding",
+        };
+        public static SupplierDal SupplierDal_ForAddingAsync { get; } = new()
+        {
+            Name = "SupplierDal_ForAddingAsync",
+        };
+        public static SupplierDal SupplierDal_ForUpdating { get; } = new()
+        {
+            Name = "SupplierDal_ForUpdating",
+        };
+        public static SupplierDal SupplierDal_ForUpdatingAsync { get; } = new()
+        {
+            Name = "SupplierDal_ForUpdatingAsync",
+        };
+        public static SupplierDal SupplierDal_ForDeleting { get; } = new()
+        {
+            Name = "SupplierDal_ForDeleting",
+        };
+        public static SupplierDal SupplierDal_ForDeletingAsync { get; } = new()
+        {
+            Name = "SupplierDal_ForDeletingAsync",
+        };
+        public static SuppliersProductDal SuppliersProductDal_1 { get; } = new()
+        {
+            Price = 10m,
+            Product = ProductDal_1,
+            ProductId = ProductDal_1.Id,
+            Supplier = SupplierDal_1,
+            SupplierId = SupplierDal_1.Id,
+        };
+        public static StockDal StockDal_1 { get; } = new()
+        {
+            Name = "StockDal_1",
+        };
+        public static StockDal StockDal_ForAdding { get; } = new()
+        {
+            Name = "StockDal_ForAdding",
+        };
+        public static StockDal StockDal_ForAddingAsync { get; } = new()
+        {
+            Name = "StockDal_ForAddingAsync",
+        };
+        public static StockDal StockDal_ForDeleting { get; } = new()
+        {
+            Name = "StockDal_ForDeleting",
+        };
+        public static StockDal StockDal_ForDeletingAsync { get; } = new()
+        {
+            Name = "StockDal_ForDeletingAsync",
+        };
+        public static StockDal StockDal_ForUpdating { get; } = new()
+        {
+            Name = "StockDal_ForUpdating",
+        };
+        public static StockDal StockDal_ForUpdatingAsync { get; } = new()
+        {
+            Name = "StockDal_ForUpdatingAsync",
+        };
+        public static StocksProductDal StocksProductDal_1 { get; } = new()
+        {
+            Product = ProductDal_1,
+            ProductId = ProductDal_1.Id,
+            Supplier = SupplierDal_1,
+            SupplierId = SupplierDal_1.Id,
+            Stock = StockDal_1,
+            StockId = StockDal_1.Id,
+            Quantity = 10,
+        };
+        public static ProductDom ProductDom_1 { get; } = new()
+        {
+            Name = "ProductDal_1",
+        };
+        public static ProductDom ProductDom_ForAdding { get; } = new()
+        {
+            Name = "ProductDal_ForAdding",
+        };
+        public static ProductDom ProductDom_ForUpdating { get; } = new()
+        {
+            Name = "ProductDom_ForUpdating",
+        };
+        public static ProductDom ProductDom_ForDeleting { get; } = new()
+        {
+            Name = "ProductDom_ForDeleting",
+        };
+        public static SupplierDom SupplierDom_1 { get; } = new()
+        {
+            Name = "SupplierDom_1",
+        };
+        public static SuppliersProductDom SuppliersProductDom_1 { get; } = new()
+        {
+            Id = ProductDom_1.Id,
+            Name = ProductDom_1.Name,
+            SupplierId = SupplierDom_1.Id,
+        };
+        public static StockDom StockDom_1 { get; } = new()
+        {
+            Name = "StockDom_1",
+        };
+        public static StocksProductDom StocksProductDom_1 { get; } = new()
+        {
+            Id = ProductDom_1.Id,
+            Name = ProductDom_1.Name,
+            SupplierId = SupplierDom_1.Id,
+            SuppliersPrice = SuppliersProductDom_1.SuppliersPrice,
+            StockId = StockDom_1.Id,
+            Quantity = 10,
+        };
+
         static TestData()
         {
-            AllProducts.Add(Product1);
-            AllProducts.Add(Product2);
+            SupplierDal_1.SuppliersProducts.Add(SuppliersProductDal_1);
+            SupplierDom_1.SuppliersProducts.Add(SuppliersProductDom_1);
 
-
-            AllSuppliers.Add(Supplier1);
-            AllSuppliers.Add(Supplier2);
+            StockDal_1.StocksProducts.Add(StocksProductDal_1);
+            StockDom_1.StocksProducts.Add(StocksProductDom_1);
         }
     }
 }
