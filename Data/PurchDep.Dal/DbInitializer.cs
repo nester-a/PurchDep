@@ -7,6 +7,7 @@
             context.Database.EnsureCreated();
             context.Products.AddRange(TestData.AllProducts);
             context.Suppliers.AddRange(TestData.AllSuppliers);
+            context.Stocks.AddRange(TestData.AllStocks);
             context.SaveChanges();
         }
     }
