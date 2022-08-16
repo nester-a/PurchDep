@@ -1,0 +1,52 @@
+﻿@model PurchDep.Domain.Stock
+
+<section>
+    <h1>Stock Details</h1>
+        <table>
+        <thead>
+            <th>Id</th>
+            <th>Name</th>
+            <th></th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Model.Id</td>
+                <td>@Model.Name</td>
+                <td>
+                    <a asp-action="Delete" asp-route-id="@Model.Id">
+                        Удалить
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <h2>Suppliers Products</h2>
+    <table>
+        <table>
+            <thead>
+                <th>Id</th>
+                <th>Name</th>
+                <th></th>
+            </thead>
+            <tbody>
+                @foreach(var product in Model.StocksProducts)
+                {
+                    <tr>
+                        <td>
+                            <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
+                                @product.Id
+                            </a>
+                        </td>
+                        <td>@product.Name</td>
+                        <td>
+                            <a asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id">
+                                Удалить
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </table>
+</section>
+
