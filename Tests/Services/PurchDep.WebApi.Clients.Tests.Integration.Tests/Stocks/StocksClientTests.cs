@@ -8,12 +8,12 @@ using Xunit;
 namespace PurchDep.WebApi.Clients.Tests.Integration.Tests.Stocks
 {
     [Collection("WebApi Client collection")]
-    public class StockClientTests
+    public class StocksClientTests
     {
         private readonly HostFixture _fixture;
         StocksClient _client;
 
-        public StockClientTests(HostFixture fixture)
+        public StocksClientTests(HostFixture fixture)
         {
             _fixture = fixture;
             _client = new StocksClient(_fixture.HttpClient);
