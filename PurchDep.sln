@@ -43,8 +43,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PurchDep.UI.Mvc", "UI\Purch
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PurchDep.Interfaces.Tests", "Tests\Services\PurchDep.Interfaces.Tests\PurchDep.Interfaces.Tests.csproj", "{A53693ED-A2C6-4240-B269-8D7E9F76DBD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PurchDep.WebApi.Clients.Tests", "Tests\Services\PurchDep.WebApi.Clients.Tests\PurchDep.WebApi.Clients.Tests.csproj", "{73DA2752-EEC8-4EFB-B56D-B8A8B68B36F1}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -99,10 +97,6 @@ Global
 		{A53693ED-A2C6-4240-B269-8D7E9F76DBD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A53693ED-A2C6-4240-B269-8D7E9F76DBD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A53693ED-A2C6-4240-B269-8D7E9F76DBD5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{73DA2752-EEC8-4EFB-B56D-B8A8B68B36F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{73DA2752-EEC8-4EFB-B56D-B8A8B68B36F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{73DA2752-EEC8-4EFB-B56D-B8A8B68B36F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{73DA2752-EEC8-4EFB-B56D-B8A8B68B36F1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -123,7 +117,6 @@ Global
 		{BB391E32-33DF-4D3A-BBC0-1E3E9FEEAD1B} = {262DBAC1-F7E6-482B-95C3-837BDBFA6DB5}
 		{81807C35-E4E8-4340-BE0B-203DB70BC921} = {F243A901-B7BE-47AF-BF95-E7CB9C01E72F}
 		{A53693ED-A2C6-4240-B269-8D7E9F76DBD5} = {262DBAC1-F7E6-482B-95C3-837BDBFA6DB5}
-		{73DA2752-EEC8-4EFB-B56D-B8A8B68B36F1} = {262DBAC1-F7E6-482B-95C3-837BDBFA6DB5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {958A7E9E-1340-4570-A573-28B52DF03816}
