@@ -41,13 +41,15 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    using (var scope = app.Services.CreateScope())
-    {
-        PurchDepContext context = scope.ServiceProvider.GetRequiredService<PurchDepContext>();
-        DbInitializer.Initialize(context);
-    }
-    app.UseSwagger();
-    app.UseSwaggerUI();
+}
+
+
+app.UseSwagger();
+app.UseSwaggerUI();
+using (var scope = app.Services.CreateScope())
+{
+    PurchDepContext context = scope.ServiceProvider.GetRequiredService<PurchDepContext>();
+    DbInitializer.Initialize(context);
 }
 
 app.UseAuthorization();
