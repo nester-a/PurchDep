@@ -44,7 +44,6 @@ namespace PurchDep.WebApi.Clients.Tests.Integration.Tests.Products
             Assert.True(res is Product);
             Assert.Equal(TestData.Product1.Id, res.Id);
             Assert.Equal(TestData.Product1.Name, res.Name);
-            Assert.Equal(TestData.Product1.Price, res.Price);
         }
 
         [Theory]
@@ -62,7 +61,6 @@ namespace PurchDep.WebApi.Clients.Tests.Integration.Tests.Products
             Assert.True(res is Product);
             Assert.Equal(TestData.Product1.Id, res.Id);
             Assert.Equal(TestData.Product1.Name, res.Name);
-            Assert.Equal(TestData.Product1.Price, res.Price);
         }
 
         [Theory]
@@ -82,7 +80,6 @@ namespace PurchDep.WebApi.Clients.Tests.Integration.Tests.Products
             Assert.True(res is Product);
             Assert.NotEqual(0, res.Id);
             Assert.Equal(item.Name, res.Name);
-            Assert.Equal(item.Price, res.Price);
         }
 
         [Fact]
@@ -109,7 +106,6 @@ namespace PurchDep.WebApi.Clients.Tests.Integration.Tests.Products
             Assert.True(res is Product);
             Assert.NotEqual(0, res.Id);
             Assert.Equal(item.Name, res.Name);
-            Assert.Equal(item.Price, res.Price);
         }
 
         [Fact]
@@ -198,7 +194,6 @@ namespace PurchDep.WebApi.Clients.Tests.Integration.Tests.Products
 
             Assert.NotNull(deletedItem);
             Assert.Equal(addedItem.Name, deletedItem.Name);
-            Assert.Equal(addedItem.Price, deletedItem.Price);
         }
 
         [Theory]
@@ -218,7 +213,6 @@ namespace PurchDep.WebApi.Clients.Tests.Integration.Tests.Products
 
             Assert.NotNull(deletedItem);
             Assert.Equal(addedItem.Name, deletedItem.Name);
-            Assert.Equal(addedItem.Price, deletedItem.Price);
         }
 
         [Theory]

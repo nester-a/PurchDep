@@ -26,11 +26,10 @@
             <thead>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Price</th>
                 <th></th>
             </thead>
             <tbody>
-                @foreach(var product in Model.Products)
+                @foreach(var product in Model.SuppliersProducts)
                 {
                     <tr>
                         <td>
@@ -39,7 +38,6 @@
                             </a>
                         </td>
                         <td>@product.Name</td>
-                        <td>@product.Price</td>
                         <td>
                             <a asp-controller="Products" asp-action="Delete" asp-route-id="@product.Id">
                                 Удалить

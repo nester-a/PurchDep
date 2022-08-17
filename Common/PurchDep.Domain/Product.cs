@@ -1,12 +1,15 @@
-﻿using PurchDep.Domain.Base;
-
-namespace PurchDep.Domain
+﻿namespace PurchDep.Domain
 {
-    public class Product<T> : IProduct<T>
+    /// <summary>Simple product entity</summary>
+    /// <typeparam name="TKey">Primary key type</typeparam>
+    public class Product<TKey>
     {
-        public T Id { get; set; } = default(T)!;
+        /// <summary>Products Id</summary>
+        public TKey Id { get; set; } = default(TKey)!;
+
+        /// <summary>Products Name</summary>
         public string Name { get; set; } = string.Empty;
-        public decimal Price { get; set; }
     }
-    public class Product : Product<int>, IProduct { }
+    /// <summary>Simple product entity with integer primary key</summary>
+    public class Product : Product<int> { }
 }

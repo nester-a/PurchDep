@@ -12,7 +12,7 @@ namespace PurchDep.Dal.Configuration
             builder.HasIndex(s => s.Id).IsUnique();
             builder.Property(s => s.Id).ValueGeneratedOnAdd();
             builder.Property(s => s.Name).IsRequired();
-            builder.HasMany(s => s.Products).WithMany(p => p.Suppliers);
+            builder.HasMany(s => s.SuppliersProducts).WithOne(p => p.Supplier).HasForeignKey(p => p.SupplierId);
         }
     }
 }

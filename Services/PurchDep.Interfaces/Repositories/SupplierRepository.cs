@@ -52,7 +52,7 @@ namespace PurchDep.Interfaces.Repositories
             if (res == null) throw new ArgumentException("There is no item with this Id in the database", nameof(id));
 
             res.Name = updatedItem.Name;
-            res.Products = updatedItem.Products;
+            res.SuppliersProducts = updatedItem.SuppliersProducts;
 
             SaveChanges();
             return res;
@@ -65,7 +65,7 @@ namespace PurchDep.Interfaces.Repositories
             if (res == null) throw new ArgumentException("There is no item with this Id in the database", nameof(id));
 
             res.Name = updatedItem.Name;
-            res.Products = updatedItem.Products;
+            res.SuppliersProducts = updatedItem.SuppliersProducts;
 
             await SaveChangesAsync(cancel);
             return res;

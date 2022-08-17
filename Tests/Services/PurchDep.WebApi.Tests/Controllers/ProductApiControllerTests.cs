@@ -1,7 +1,4 @@
 ﻿using PurchDep.Domain;
-using PurchDep.Domain.Base;
-using PurchDep.Interfaces.Mapping;
-using PurchDep.Interfaces.Repositories;
 using PurchDep.Interfaces.Services;
 using PurchDep.WebApi.Controllers;
 using PurchDep.WebApi.Tests.Data;
@@ -9,139 +6,191 @@ using PurchDep.WebApi.Tests.Fixtures;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Xunit;
+using Moq;
+using System;
 
 namespace PurchDep.WebApi.Tests.Controllers
 {
-    [Collection("WebApi Database collection")]
+    [Collection("ApiController collection")]
     public class ProductApiControllerTests
     {
-        DbFixture _fixture;
-        ProductApiController _controller;
-        public ProductApiControllerTests(DbFixture fixture)
+        Mock<ProductService> _serviceMock;
+        public ProductApiControllerTests(ApiControllerFixture fixture)
         {
-            _fixture = fixture;
-            var repo = new ProductRepository(_fixture.Db);
-            var mapper = new ProductMappingService();
-            var service = new ProductService(repo, mapper);
-
-            _controller = new ProductApiController(service);
+            _serviceMock = fixture.ProductServiceMock;
         }
 
         [Fact]
         public void GetAll_Returns_Ok_Test()
         {
-            var actionRes = _controller.GetAll();
+            _serviceMock.Setup(service => service.GetAll()).Returns(TestData.ProductsDom);
+
+            var controller = new ProductApiController(_serviceMock.Object);
+            var actionRes = controller.GetAll();
             var returnedRes = actionRes as OkObjectResult;
             var returnedObj = returnedRes!.Value as ICollection<Product>;
+
             Assert.True(returnedRes.StatusCode == 200);
             Assert.NotEqual(0, returnedObj!.Count);
+            _serviceMock.Verify(service => service.GetAll());
+        }
+
+        [Fact]
+        public void GetAll_Returns_NoContent_Test()
+        {
+            _serviceMock.Setup(service => service.GetAll()).Returns(new List<Product>());
+
+            var controller = new ProductApiController(_serviceMock.Object);
+            var actionRes = controller.GetAll();
+            var returnedRes = actionRes as NoContentResult;
+
+            Assert.True(returnedRes!.StatusCode == 204);
+            _serviceMock.Verify(service => service.GetAll());
         }
 
         [Fact]
         public void GetById_Returns_Ok_Test()
         {
-            var actionRes = _controller.GetById(TestData.Product1.Id);
+            _serviceMock.Setup(service => service.Get(It.IsAny<int>())).Returns(TestData.ProductDom_1);
+
+            var controller = new ProductApiController(_serviceMock.Object);
+            var actionRes = controller.GetById(1);
             var returnedRes = actionRes as OkObjectResult;
-            var returnedObj = returnedRes!.Value as IProduct;
+            var returnedObj = returnedRes!.Value as Product;
 
             Assert.True(returnedRes.StatusCode == 200);
-            Assert.Equal(TestData.Product1.Id, returnedObj!.Id);
-            Assert.Equal(TestData.Product1.Name, returnedObj.Name);
-            Assert.Equal(TestData.Product1.Price, returnedObj.Price);
+            Assert.Equal(TestData.ProductDom_1.Id, returnedObj!.Id);
+            Assert.Equal(TestData.ProductDom_1.Name, returnedObj.Name);
+            _serviceMock.Verify(service => service.Get(It.IsAny<int>()));
         }
 
         [Theory]
         [InlineData(404)]
         public void GetById_Returns_NotFound_Test(int id)
         {
-            var actionRes = _controller.GetById(id);
+            _serviceMock.Setup(service => service.Get(id)).Throws(new ArgumentException());
+
+            var controller = new ProductApiController(_serviceMock.Object);
+            var actionRes = controller.GetById(id);
             var returnedRes = actionRes as NotFoundObjectResult;
 
             Assert.True(returnedRes!.StatusCode == 404);
+            _serviceMock.Verify(service => service.Get(id));
         }
 
         [Fact]
         public void Add_Returns_Ok_Test()
         {
-            var actionRes = _controller.Add(TestData.Product3);
+            _serviceMock.Setup(service => service.Add(TestData.ProductDom_ForAdding)).Returns(TestData.ProductDom_ForAdding);
+
+            var controller = new ProductApiController(_serviceMock.Object);
+            var actionRes = controller.Add(TestData.ProductDom_ForAdding);
             var returnedRes = actionRes as OkObjectResult;
-            var returnedObj = returnedRes!.Value as IProduct;
+            var returnedObj = returnedRes!.Value as Product;
 
             Assert.True(returnedRes.StatusCode == 200);
-            Assert.Equal(TestData.Product3.Id, returnedObj!.Id);
-            Assert.Equal(TestData.Product3.Name, returnedObj.Name);
-            Assert.Equal(TestData.Product3.Price, returnedObj.Price);
+            Assert.Equal(TestData.ProductDom_ForAdding.Id, returnedObj!.Id);
+            Assert.Equal(TestData.ProductDom_ForAdding.Name, returnedObj.Name);
+            _serviceMock.Verify(service => service.Add(TestData.ProductDom_ForAdding));
         }
 
         [Fact]
-        public void Add_Returns_BadRequest_Test()
+        public void AddNull_Returns_BadRequest_Test()
         {
-            var actionRes = _controller.Add(null);
+            _serviceMock.Setup(service => service.Add(null!)).Throws(new ArgumentNullException());
+
+            var controller = new ProductApiController(_serviceMock.Object);
+            var actionRes = controller.Add(null!);
             var returnedRes = actionRes as BadRequestObjectResult;
 
             Assert.True(returnedRes!.StatusCode == 400);
+            _serviceMock.Verify(service => service.Add(null!));
         }
 
-        [Theory]
-        [InlineData("ProductToUpdate")]
-        public void Edit_Returns_Ok_Test(string newName)
+        [Fact]
+        public void AddAlreadyExsistsItem_Returns_BadRequest_Test()
         {
-            var productToUpdate = new Product { Name = newName };
-            var actionRes = _controller.Edit(TestData.Product1.Id, productToUpdate);
+            _serviceMock.Setup(service => service.Add(TestData.ProductDom_1)).Throws(new ArgumentException());
+
+            var controller = new ProductApiController(_serviceMock.Object);
+            var actionRes = controller.Add(TestData.ProductDom_1);
+            var returnedRes = actionRes as BadRequestObjectResult;
+
+            Assert.True(returnedRes!.StatusCode == 400);
+            _serviceMock.Verify(service => service.Add(TestData.ProductDom_1));
+        }
+
+        [Fact]
+        public void Edit_Returns_Ok_Test()
+        {
+            _serviceMock.Setup(service => service.Update(It.IsAny<int>(), TestData.ProductDom_ForUpdating)).Returns(TestData.ProductDom_ForUpdating);
+
+            var controller = new ProductApiController(_serviceMock.Object);
+            var actionRes = controller.Edit(1, TestData.ProductDom_ForUpdating);
             var returnedRes = actionRes as OkObjectResult;
-            var returnedObj = returnedRes!.Value as IProduct;
+            var returnedObj = returnedRes!.Value as Product;
 
             Assert.True(returnedRes.StatusCode == 200);
-            Assert.Equal(TestData.Product1.Id, returnedObj!.Id);
-            Assert.Equal(TestData.Product1.Name, returnedObj.Name);
-            Assert.Equal(TestData.Product1.Name, newName);
-            Assert.Equal(TestData.Product1.Price, returnedObj.Price);
+            Assert.Equal(TestData.ProductDom_ForUpdating.Id, returnedObj!.Id);
+            Assert.Equal(TestData.ProductDom_ForUpdating.Name, returnedObj.Name);
+            _serviceMock.Verify(service => service.Update(It.IsAny<int>(), TestData.ProductDom_ForUpdating));
         }
 
         [Fact]
         public void Edit_Returns_BadRequest_Test()
         {
-            var actionRes = _controller.Edit(TestData.Product1.Id, null);
+            _serviceMock.Setup(service => service.Update(It.IsAny<int>(), null!)).Throws(new ArgumentNullException());
+
+            var controller = new ProductApiController(_serviceMock.Object);
+            var actionRes = controller.Edit(1, null!);
             var returnedRes = actionRes as BadRequestObjectResult;
 
             Assert.True(returnedRes!.StatusCode == 400);
+            _serviceMock.Verify(service => service.Update(It.IsAny<int>(), null!));
         }
 
         [Theory]
-        [InlineData(404, "ProductToUpdate")]
-        public void Edit_Returns_NotFound_Test(int id, string newName)
+        [InlineData(404)]
+        public void Edit_Returns_NotFound_Test(int id)
         {
-            var productToUpdate = new Product { Name = newName };
-            var actionRes = _controller.Edit(id, productToUpdate);
+            _serviceMock.Setup(service => service.Update(id, It.IsAny<Product>())).Throws(new ArgumentException());
+
+            var controller = new ProductApiController(_serviceMock.Object);
+            var actionRes = controller.Edit(id, TestData.ProductDom_ForUpdating);
             var returnedRes = actionRes as NotFoundObjectResult;
 
             Assert.True(returnedRes!.StatusCode == 404);
+            _serviceMock.Verify(service => service.Update(id, It.IsAny<Product>()));
         }
 
         [Fact]
         public void Delete_Returns_Ok_Test()
         {
-            _controller.Add(TestData.Product4);
-            Assert.NotEqual(0, TestData.Product4.Id);
+            _serviceMock.Setup(service => service.Delete(It.IsAny<int>())).Returns(TestData.ProductDom_ForDeleting);
 
-            var actionRes = _controller.Delete(TestData.Product4.Id);
+            var controller = new ProductApiController(_serviceMock.Object);
+            var actionRes = controller.Delete(1);
             var returnedRes = actionRes as OkObjectResult;
-            var returnedObj = returnedRes!.Value as IProduct;
+            var returnedObj = returnedRes!.Value as Product;
 
             Assert.True(returnedRes.StatusCode == 200);
-            Assert.Equal(TestData.Product4.Id, returnedObj!.Id);
-            Assert.Equal(TestData.Product4.Name, returnedObj.Name);
-            Assert.Equal(TestData.Product4.Price, returnedObj.Price);
+            Assert.Equal(TestData.ProductDom_ForDeleting.Id, returnedObj!.Id);
+            Assert.Equal(TestData.ProductDom_ForDeleting.Name, returnedObj.Name);
+            _serviceMock.Verify(service => service.Delete(It.IsAny<int>()));
         }
 
         [Theory]
         [InlineData(404)]
         public void Delete_Returns_NotFound_Test(int id)
         {
-            var actionRes = _controller.Delete(id);
+            _serviceMock.Setup(service => service.Delete(id)).Throws(new ArgumentException());
+
+            var controller = new ProductApiController(_serviceMock.Object);
+            var actionRes = controller.Delete(id);
             var returnedRes = actionRes as NotFoundObjectResult;
 
-            Assert.True(returnedRes.StatusCode == 404);
+            Assert.True(returnedRes!.StatusCode == 404);
+            _serviceMock.Verify(service => service.Delete(id));
         }
     }
 }

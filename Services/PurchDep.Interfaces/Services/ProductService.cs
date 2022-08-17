@@ -7,7 +7,7 @@ namespace PurchDep.Interfaces.Services
 {
     public class ProductService : Service<ProductDal, ProductDom>
     {
-        public ProductService(Repository<ProductDal> repository, IMappingService<ProductDal, ProductDom> mapper) : base(repository, mapper) { }
+        public ProductService(Repository<ProductDal> repository, MappingService<ProductDal, ProductDom> mapper) : base(repository, mapper) { }
 
         public override ProductDom Add(ProductDom item)
         {

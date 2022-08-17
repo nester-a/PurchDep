@@ -17,7 +17,7 @@ namespace PurchDep.Interfaces.Base.Services
 
         public abstract Task<TResult> AddAsync(TResult item, CancellationToken cancel = default);
 
-        public TResult Delete(TKey id)
+        public virtual TResult Delete(TKey id)
         {
             TSource sourceResult;
             try
@@ -33,7 +33,7 @@ namespace PurchDep.Interfaces.Base.Services
             return result;
         }
 
-        public async Task<TResult> DeleteAsync(TKey id, CancellationToken cancel = default)
+        public virtual async Task<TResult> DeleteAsync(TKey id, CancellationToken cancel = default)
         {
             TSource sourceResult;
             try
@@ -48,7 +48,7 @@ namespace PurchDep.Interfaces.Base.Services
             return result;
         }
 
-        public TResult Get(TKey id)
+        public virtual TResult Get(TKey id)
         {
             TSource sourceResult;
             try
@@ -63,7 +63,7 @@ namespace PurchDep.Interfaces.Base.Services
             return result;
         }
 
-        public ICollection<TResult> GetAll()
+        public virtual ICollection<TResult> GetAll()
         {
             ICollection<TSource> sourceResult;
             try
@@ -78,7 +78,7 @@ namespace PurchDep.Interfaces.Base.Services
             return result;
         }
 
-        public async Task<ICollection<TResult>> GetAllAsync(CancellationToken cancel = default)
+        public virtual async Task<ICollection<TResult>> GetAllAsync(CancellationToken cancel = default)
         {
             ICollection<TSource> sourceResult;
             try
@@ -93,7 +93,7 @@ namespace PurchDep.Interfaces.Base.Services
             return result;
         }
 
-        public async Task<TResult> GetAsync(TKey id, CancellationToken cancel = default)
+        public virtual async Task<TResult> GetAsync(TKey id, CancellationToken cancel = default)
         {
             TSource sourceResult;
             try
@@ -108,7 +108,7 @@ namespace PurchDep.Interfaces.Base.Services
             return result;
         }
 
-        public TResult Update(TKey id, TResult updatedItem)
+        public virtual TResult Update(TKey id, TResult updatedItem)
         {
             TSource sourceResult;
             var sourceToUpdate = Mapper.Map(updatedItem);
@@ -124,7 +124,7 @@ namespace PurchDep.Interfaces.Base.Services
             return result;
         }
 
-        public async Task<TResult> UpdateAsync(TKey id, TResult updatedItem, CancellationToken cancel = default)
+        public virtual async Task<TResult> UpdateAsync(TKey id, TResult updatedItem, CancellationToken cancel = default)
         {
             TSource sourceResult;
             var sourceToUpdate = await Mapper.MapAsync(updatedItem, cancel);

@@ -6,14 +6,12 @@
             <thead>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Price</th>
                 <th></th>
             </thead>
             <tbody>
                 <tr>
                     <td>@Model.Id</td>
                     <td>@Model.Name</td>
-                    <td>@Model.Price</td>
                     <td>
                         <a asp-action="Delete" asp-route-id="@Model.Id">
                             Удалить
