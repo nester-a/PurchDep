@@ -2,29 +2,12 @@
 
 <section>
     <h1>Products List</h1>
-    <table>
-        <thead>
-            <th>Id</th>
-            <th>Name</th>
-            <th></th>
-        </thead>
-        <tbody>
-            @foreach (var product in Model)
-            {
-                <tr>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@product.Id">
-                            @product.Id
-                        </a>
-                    </td>
-                    <td>@product.Name</td>
-                    <td>
-                        <a asp-action="Delete" asp-route-id="@product.Id">
-                            Удалить
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <ul>
+        @foreach (var product in Model!)
+        {
+            <li>
+                <a asp-action="Details" asp-route-id="@product.Id">@product.Name</a>
+            </li>
+        }
+    </ul>
 </section>

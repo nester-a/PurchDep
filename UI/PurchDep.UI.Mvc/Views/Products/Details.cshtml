@@ -2,23 +2,10 @@
 
 <section>
     <h1>Product Details</h1>
-        <table>
-            <thead>
-                <th>Id</th>
-                <th>Name</th>
-                <th></th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>@Model.Id</td>
-                    <td>@Model.Name</td>
-                    <td>
-                        <a asp-action="Delete" asp-route-id="@Model.Id">
-                            Удалить
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+    <ul>
+        <li><p>Id : @Model!.Id</p></li>
+        <li><p>Name : @Model!.Name</p></li>
+    </ul>
+    <button asp-action="Delete" asp-route-id="@Model!.Id">Delete</button>
 </section>
 

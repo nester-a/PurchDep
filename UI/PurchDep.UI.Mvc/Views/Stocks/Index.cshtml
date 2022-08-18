@@ -2,29 +2,12 @@
 
 <section>
     <h1>Stocks List</h1>
-    <table>
-        <thead>
-            <th>Id</th>
-            <th>Name</th>
-            <th></th>
-        </thead>
-        <tbody>
-            @foreach (var stock in Model)
-            {
-                <tr>
-                    <td>
-                        <a asp-action="Details" asp-route-id="@stock.Id">
-                            @stock.Id
-                        </a>
-                    </td>
-                    <td>@stock.Name</td>
-                    <td>
-                        <a asp-action="Delete" asp-route-id="@stock.Id">
-                            Удалить
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <ul>
+        @foreach (var stock in Model!)
+        {
+            <li>
+                <a asp-action="Details" asp-route-id="@stock.Id">@stock.Name</a>
+            </li>
+        }
+    </ul>
 </section>
