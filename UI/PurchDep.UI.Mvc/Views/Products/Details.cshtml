@@ -6,6 +6,7 @@
         <li><p>Id : @Model!.Id</p></li>
         <li><p>Name : @Model!.Name</p></li>
     </ul>
-    <button asp-action="Delete" asp-route-id="@Model!.Id">Delete</button>
+    <a asp-action="Update" asp-route-id="@Model!.Id">Update</a>
+    <a asp-action="Delete" asp-route-id="@Model!.Id">Delete</a>
 </section>
 
