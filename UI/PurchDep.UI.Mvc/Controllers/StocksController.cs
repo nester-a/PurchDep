@@ -96,5 +96,33 @@ namespace PurchDep.UI.Mvc.Controllers
             _stockService.Update(stock.Id, stock);
             return RedirectToAction("Details", new { id = stock.Id });
         }
+
+
+        [HttpPost]
+        public IActionResult UpdateProduct(UpdateStocksProductModel model)
+        {
+            var stock = _stockService.Get(model.StockId);
+            var productDom = stock.StocksProducts.FirstOrDefault(p => p.Id == model.ProductId && p.SupplierId == model.SupplierId && p.StockId == model.StockId);
+            productDom!.Quantity = model.NewQuantity;
+
+            _stockService.Update(stock.Id, stock);
+            return RedirectToAction("Details", new { id = stock.Id });
+        }
+
+        public IActionResult UpdateProduct(int stockId, int supplierId, int productId)
+        {
+            var model = new UpdateStocksProductModel() { ProductId = productId, SupplierId = supplierId,  StockId = stockId };
+            return View("UpdateProduct", model);
+        }
+
+        [HttpPost]
+        public IActionResult RemoveProduct(int stockId, int supplierId, int productId)
+        {
+            var stock = _stockService.Get(supplierId);
+            stock.StocksProducts.RemoveWhere(p => p.Id == productId && p.SupplierId == supplierId && p.StockId == stockId);
+
+            _stockService.Update(stockId, stock);
+            return RedirectToAction("Details", new { id = stockId });
+        }
     }
 }

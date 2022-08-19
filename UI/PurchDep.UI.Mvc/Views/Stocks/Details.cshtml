@@ -30,6 +30,16 @@
                    <td>@product.Name</td>
                    <td>@product.SuppliersPrice</td>
                    <td>@product.Quantity</td>
+                   <td>
+                       <a asp-action="UpdateProduct" asp-route-stockId="@Model!.Id" asp-route-supplierId="@product.SupplierId" asp-route-productId="@product.Id">
+                           <input type="submit" value="Update"/>
+                       </a>
+                   </td>
+                   <td>
+                       <form asp-action="RemoveProduct" asp-route-stockId="@Model!.Id" asp-route-supplierId="@product.SupplierId" asp-route-productId="@product.Id">
+                           <input type="submit" value="Delete" formmethod="post"/>
+                       </form>
+                   </td>
                </tr>
            }
         </tbody>
