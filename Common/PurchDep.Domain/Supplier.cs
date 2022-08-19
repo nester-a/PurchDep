@@ -14,5 +14,8 @@
         public HashSet<SuppliersProduct<TKey>> SuppliersProducts { get; set; } = new();
     }
     /// <summary>Supplier enity with integer primary key</summary>
-    public class Supplier : Supplier<int> { }
+    public class Supplier : Supplier<int>
+    {
+        public new HashSet<SuppliersProduct> SuppliersProducts { get; set; } = new();
+    }
 }

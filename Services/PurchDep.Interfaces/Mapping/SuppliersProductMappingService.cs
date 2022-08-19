@@ -9,12 +9,11 @@ namespace PurchDep.Interfaces.Mapping
         public override SuppliersProductDom Map(SuppliersProductDal item)
         {
             if (item is null) return null!;
-            var currentSuppliersProduct = item.Supplier.SuppliersProducts.FirstOrDefault(p => p.SupplierId == item.SupplierId);
             var result = new SuppliersProductDom()
             {
                 Id = item.ProductId,
                 Name = item.Product.Name,
-                SuppliersPrice = currentSuppliersProduct!.Price,
+                SuppliersPrice = item.Price,
                 SupplierId = item.SupplierId,
             };
 
