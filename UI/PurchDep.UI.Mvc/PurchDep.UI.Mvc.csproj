@@ -15,4 +15,6 @@
     <ProjectReference Include="..\..\Services\PurchDep.WebApi.Clients\PurchDep.WebApi.Clients.csproj" />
   </ItemGroup>
 
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
+
 </Project>
