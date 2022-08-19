@@ -64,13 +64,15 @@ namespace PurchDep.UI.Mvc.Controllers
         public IActionResult AddSuppliersProduct(int id)
         {
             var model = new SuppliersProduct() { SupplierId = id };
-            return View("AddSuppliersProduct", model );
+            return View("EditSuppliersProduct", model );
         }
 
         [HttpPost]
-        public IActionResult AddSuppliersProduct(SuppliersProduct supplierProduct)
+        public IActionResult EditSuppliersProduct(SuppliersProduct supplierProduct)
         {
             if (supplierProduct is null) throw new ArgumentNullException();
+            var supplier = _supplierService.Get(supplierProduct.SupplierId);
+
             if (supplierProduct.Id == 0)
             {
                 var productDom = new Product()
@@ -79,13 +81,33 @@ namespace PurchDep.UI.Mvc.Controllers
                 };
                 var res = _productService.Add(productDom);
                 supplierProduct.Id = res.Id;
+                supplier.SuppliersProducts.Add(supplierProduct);
+            }
+            else
+            {
+                var productDom = supplier.SuppliersProducts.FirstOrDefault(p => p.Id == supplierProduct.Id && p.SupplierId == supplierProduct.SupplierId);
+                productDom!.SuppliersPrice = supplierProduct.SuppliersPrice;
             }
 
-            var supplier = _supplierService.Get(supplierProduct.SupplierId);
-            supplier.SuppliersProducts.Add(supplierProduct);
-
             _supplierService.Update(supplier.Id, supplier);
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction("Details", new { id = supplier.Id });
+        }
+
+        [HttpPost]
+        public IActionResult UpdateSuppliersProduct(int supplierId, int productId)
+        {
+            var model = new SuppliersProduct() { Id = productId, SupplierId = supplierId };
+            return View("EditSuppliersProduct", model);
+        }
+
+        [HttpPost]
+        public IActionResult RemoveSuppliersProduct(int supplierId, int productId)
+        {
+            var supplier = _supplierService.Get(supplierId);
+            supplier.SuppliersProducts.RemoveWhere(p => p.Id == productId && p.SupplierId == supplierId);
+
+            _supplierService.Update(supplierId, supplier);
+            return RedirectToAction("Details", new { id = supplierId });
         }
     }
 }

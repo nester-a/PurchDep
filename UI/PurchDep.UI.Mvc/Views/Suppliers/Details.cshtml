@@ -15,6 +15,7 @@
                 <th>Id</th>
                 <th>Name</th>
                 <th>Suppliers Price</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,16 @@
                    </td>
                    <td>@product.Name</td>
                    <td>@product.SuppliersPrice</td>
+                   <td>
+                       <form asp-action="UpdateSuppliersProduct" asp-route-supplierId="@Model!.Id" asp-route-productId="@product.Id">
+                           <input type="submit" value="Update" formmethod="post"/>
+                       </form>
+                   </td>
+                   <td>
+                       <form asp-action="RemoveSuppliersProduct" asp-route-supplierId="@Model!.Id" asp-route-productId="@product.Id">
+                           <input type="submit" value="Delete" formmethod="post"/>
+                       </form>
+                   </td>
                </tr>
            }
         </tbody>
