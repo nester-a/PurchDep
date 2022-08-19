@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PurchDep.Domain;
 using PurchDep.Interfaces.Base.Services;
+using PurchDep.UI.Mvc.Models;
 
 namespace PurchDep.UI.Mvc.Controllers
 {
@@ -61,32 +62,45 @@ namespace PurchDep.UI.Mvc.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult AddSuppliersProduct(int id)
+        public IActionResult AddProduct(int id)
         {
-            var model = new SuppliersProduct() { SupplierId = id };
-            return View("EditSuppliersProduct", model );
+            var model = new AddSupplierProductModel() { SupplierId = id };
+            return View("AddProduct", model );
         }
 
         [HttpPost]
-        public IActionResult EditSuppliersProduct(SuppliersProduct supplierProduct)
+        public IActionResult AddProduct(AddSupplierProductModel model)
         {
-            if (supplierProduct is null) throw new ArgumentNullException();
-            var supplier = _supplierService.Get(supplierProduct.SupplierId);
-
-            if (supplierProduct.Id == 0)
+            if (model is null) throw new ArgumentNullException();
+            var supplier = _supplierService.Get(model.SupplierId);
+            if (model.NewProduct)
             {
                 var productDom = new Product()
                 {
-                    Name = supplierProduct.Name,
+                    Name = model.NewProductName,
                 };
                 var res = _productService.Add(productDom);
-                supplierProduct.Id = res.Id;
-                supplier.SuppliersProducts.Add(supplierProduct);
+
+                var supProduct = new SuppliersProduct()
+                {
+                    Id = res.Id,
+                    Name = res.Name,
+                    SupplierId = model.SupplierId,
+                    SuppliersPrice = model.Price,
+                };
+                supplier.SuppliersProducts.Add(supProduct);
             }
             else
             {
-                var productDom = supplier.SuppliersProducts.FirstOrDefault(p => p.Id == supplierProduct.Id && p.SupplierId == supplierProduct.SupplierId);
-                productDom!.SuppliersPrice = supplierProduct.SuppliersPrice;
+                var productDom = _productService.Get((int)model.ProductId!);
+                var supProduct = new SuppliersProduct()
+                {
+                    Id = productDom.Id,
+                    Name = productDom.Name,
+                    SupplierId = model.SupplierId,
+                    SuppliersPrice = model.Price,
+                };
+                supplier.SuppliersProducts.Add(supProduct);
             }
 
             _supplierService.Update(supplier.Id, supplier);
@@ -94,14 +108,24 @@ namespace PurchDep.UI.Mvc.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateSuppliersProduct(int supplierId, int productId)
+        public IActionResult UpdateProduct(UpdateSuppliersProductModel model)
         {
-            var model = new SuppliersProduct() { Id = productId, SupplierId = supplierId };
-            return View("EditSuppliersProduct", model);
+            var supplier = _supplierService.Get(model.SupplierId);
+            var productDom = supplier.SuppliersProducts.FirstOrDefault(p => p.Id == model.ProductId && p.SupplierId == model.SupplierId);
+            productDom!.SuppliersPrice = model.NewPrice;
+
+            _supplierService.Update(supplier.Id, supplier);
+            return RedirectToAction("Details", new { id = supplier.Id });
+        }
+
+        public IActionResult UpdateProduct(int supplierId, int productId)
+        {
+            var model = new UpdateSuppliersProductModel() { ProductId = productId, SupplierId = supplierId };
+            return View("UpdateProduct", model);
         }
 
         [HttpPost]
-        public IActionResult RemoveSuppliersProduct(int supplierId, int productId)
+        public IActionResult RemoveProduct(int supplierId, int productId)
         {
             var supplier = _supplierService.Get(supplierId);
             supplier.SuppliersProducts.RemoveWhere(p => p.Id == productId && p.SupplierId == supplierId);
