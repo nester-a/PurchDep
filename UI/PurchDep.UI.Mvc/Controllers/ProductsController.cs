@@ -27,5 +27,35 @@ namespace PurchDep.UI.Mvc.Controllers
             _service.Delete(id);
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Create()
+        {
+            return View("Update", new Product());
+        }
+
+        public IActionResult Update(int? id)
+        {
+            if(id is null) return View(new Product());
+
+            var product = _service.Get((int)id);
+            if (product is null) return NotFound();
+
+            var item = new Product()
+            {
+                Name = product.Name,
+            };
+
+            return View(item);
+        }
+
+        [HttpPost]
+        public IActionResult Update(Product model)
+        {
+            var item = model;
+            if(item.Id == 0) _service.Add(item);
+            else _service.Update(item.Id, item);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
