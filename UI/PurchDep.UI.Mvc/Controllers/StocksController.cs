@@ -1,32 +1,37 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PurchDep.Domain;
 using PurchDep.Interfaces.Base.Services;
+using PurchDep.UI.Mvc.Models;
 
 namespace PurchDep.UI.Mvc.Controllers
 {
     public class StocksController : Controller
     {
-        private readonly IService<Stock> _service;
+        private readonly IService<Stock> _stockService;
+        private readonly IService<Supplier> _supplierService;
+        private readonly IService<Product> _productService;
 
-        public StocksController(IService<Stock> service)
+        public StocksController(IService<Stock> stockService, IService<Supplier> supplierService, IService<Product> productService)
         {
-            _service = service;
+            _stockService = stockService;
+            _supplierService = supplierService;
+            _productService = productService;
         }
 
 
         public IActionResult Index()
         {
-            var items = _service.GetAll();
+            var items = _stockService.GetAll();
             return View(items);
         }
         public IActionResult Details(int id)
         {
-            var item = _service.Get(id);
+            var item = _stockService.Get(id);
             return View(item);
         }
         public IActionResult Delete(int id)
         {
-            _service.Delete(id);
+            _stockService.Delete(id);
             return RedirectToAction(nameof(Index));
         }
 
@@ -40,7 +45,7 @@ namespace PurchDep.UI.Mvc.Controllers
         {
             if (id is null) return View(new Stock());
 
-            var supplier = _service.Get((int)id);
+            var supplier = _stockService.Get((int)id);
             if (supplier is null) return NotFound();
 
             var item = new Stock()
@@ -55,10 +60,41 @@ namespace PurchDep.UI.Mvc.Controllers
         public IActionResult Update(Stock model)
         {
             var item = model;
-            if (item.Id == 0) _service.Add(item);
-            else _service.Update(item.Id, item);
+            if (item.Id == 0) _stockService.Add(item);
+            else _stockService.Update(item.Id, item);
 
             return RedirectToAction(nameof(Index));
+        }
+
+
+        public IActionResult AddProduct(int id)
+        {
+            var model = new AddStocksProductModel() { StockId = id };
+            return View("AddProduct", model);
+        }
+
+        [HttpPost]
+        public IActionResult AddProduct(AddStocksProductModel model)
+        {
+            if (model is null) throw new ArgumentNullException();
+            var stock = _stockService.Get(model.StockId);
+            var product = _productService.Get(model.ProductId);
+            var supplier = _supplierService.Get(model.SupplierId);
+            var supplierProduct = supplier.SuppliersProducts.FirstOrDefault(p => p.Id == product.Id);
+
+            var result = new StocksProduct()
+            {
+                Id = product.Id,
+                Name = product.Name,
+                SupplierId = supplier.Id,
+                SuppliersPrice = supplierProduct!.SuppliersPrice,
+                StockId = model.StockId,
+                Quantity = model.Quantity,
+            };
+            stock.StocksProducts.Add(result);
+
+            _stockService.Update(stock.Id, stock);
+            return RedirectToAction("Details", new { id = stock.Id });
         }
     }
 }
