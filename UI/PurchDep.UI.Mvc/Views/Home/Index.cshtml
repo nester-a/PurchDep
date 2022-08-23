@@ -1,4 +1,16 @@
 ﻿<section>
     <h1 class="content-heading">Main Page</h1>
-    <p>Purchasing Department App Welcomes You</p>
+    @for (int i = 0; i < 3; i++)
+    {
+        <div class="index-page-content-item">
+            <p class="index-page-content-item-heading">Category @(i + 1)</p>
+            <div class="index-page-content-item-block">
+                @for (var j = 0; j < 3; j++)
+                {
+                    <p>Position @(j + 1)</p>
+                }
+            </div>
+            <button class="index-page-content-item-button">Show more</button>
+        </div>
+    }
 </section>
