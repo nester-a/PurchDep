@@ -1,0 +1,9 @@
+﻿.content-list {
+    border: 1px solid #356ead;
+    box-sizing: border-box;
+    border-radius: 10px;
+}
+
+.content-heading{
+    text-align:center;
+}
