@@ -20,9 +20,7 @@ namespace PurchDep.UI.Mvc.Controllers
         }
         public IActionResult Index()
         {
-            IndexNamedEnitiesListModel model = new();
 
-            List<IndexNamedEntityModel> models = new();
             IndexNamedEntityModel products = new IndexNamedEntityModel()
             {
                 NamedEntityName = "Products",
@@ -35,18 +33,30 @@ namespace PurchDep.UI.Mvc.Controllers
             };
             suppliers.Items = _supplierService.GetAll();
 
-            //IndexNamedEntityModel stocks = new IndexNamedEntityModel()
-            //{
-            //    NamedEntityName = "Stocks",
-            //};
-            //stocks.Items = _stockService.GetAll();
+            IndexNamedEntityModel stocks = new IndexNamedEntityModel()
+            {
+                NamedEntityName = "Stocks",
+            };
+            stocks.Items = _stockService.GetAll();
 
-            models.Add(products);
-            models.Add(suppliers);
-
-            model.Items = models;
+            var model = CreateListModel(products, suppliers, stocks);
 
             return View(model);
+        }
+
+        private IndexNamedEnitiesListModel CreateListModel(params IndexNamedEntityModel[] items)
+        {
+            List<IndexNamedEntityModel> list = new();
+
+            foreach (var item in items)
+            {
+                list.Add(item);
+            }
+            IndexNamedEnitiesListModel model = new();
+            model.Items = list;
+
+            return model;
+
         }
     }
 }
