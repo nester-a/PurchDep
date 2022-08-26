@@ -1,8 +1,10 @@
-﻿namespace PurchDep.Domain
+﻿using PurchDep.Domain.Base.Core;
+
+namespace PurchDep.Domain
 {
     /// <summary>Supplier enity</summary>
     /// <typeparam name="TKey">Primary key type</typeparam>
-    public class Supplier<TKey>
+    public class Supplier<TKey> : IEntity<TKey>, INamedEntity<TKey>
     {
         /// <summary>Suppliers Id</summary>
         public TKey Id { get; set; } = default(TKey)!;
@@ -14,7 +16,7 @@
         public HashSet<SuppliersProduct<TKey>> SuppliersProducts { get; set; } = new();
     }
     /// <summary>Supplier enity with integer primary key</summary>
-    public class Supplier : Supplier<int>
+    public class Supplier : Supplier<int>,  IEntity, INamedEntity
     {
         public new HashSet<SuppliersProduct> SuppliersProducts { get; set; } = new();
     }
