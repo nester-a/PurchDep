@@ -61,7 +61,12 @@ namespace PurchDep.UI.Mvc.Controllers
         {
             var item = model;
             if (item.Id == 0) _stockService.Add(item);
-            else _stockService.Update(item.Id, item);
+            else 
+            {
+                var stock = _stockService.Get(item.Id);
+                stock.Name = item.Name;
+                _stockService.Update(item.Id, stock);
+            }
 
             return RedirectToAction(nameof(Index));
         }
