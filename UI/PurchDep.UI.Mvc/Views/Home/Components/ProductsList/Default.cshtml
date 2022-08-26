@@ -1,0 +1,12 @@
+﻿@model IEnumerable<Product>
+
+<div class="index-products-list">
+    <h2>Products List</h2>
+    
+    @foreach (var product in Model!)
+    {
+        <p>@product.Name</p>
+    }
+</div>
+
+

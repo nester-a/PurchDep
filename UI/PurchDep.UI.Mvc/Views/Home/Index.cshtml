@@ -1,5 +1,8 @@
 ﻿<section>
     <h1 class="content-heading">Main Page</h1>
+   
+   @await Component.InvokeAsync("ProductsList")
+   <hr>
     @for (int i = 0; i < 3; i++)
     {
         <div class="index-page-content-item">

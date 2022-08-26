@@ -29,6 +29,10 @@
     background-color: white;
     width: 200px;
 }
+
+.main-menu-item:hover{
+    background-color:lightblue;
+}
 .main-menu-container {
     display: flex;
     width: 900px;
