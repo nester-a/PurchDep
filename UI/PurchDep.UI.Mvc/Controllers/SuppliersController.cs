@@ -57,7 +57,12 @@ namespace PurchDep.UI.Mvc.Controllers
         {
             var item = model;
             if (item.Id == 0) _supplierService.Add(item);
-            else _supplierService.Update(item.Id, item);
+            else
+            {
+                var supplier = _supplierService.Get(item.Id);
+                supplier.Name = item.Name;
+                _supplierService.Update(item.Id, supplier);
+            }
 
             return RedirectToAction(nameof(Index));
         }
