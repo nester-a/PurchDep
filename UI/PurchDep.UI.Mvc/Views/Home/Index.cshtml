@@ -4,8 +4,6 @@
 
    @await Component.InvokeAsync("NamedEntitiesList", new { items = Model })
    <hr>
-   @await Component.InvokeAsync("ProductsList")
-   <hr>
     @for (int i = 0; i < 3; i++)
     {
         <div class="index-page-content-item">
