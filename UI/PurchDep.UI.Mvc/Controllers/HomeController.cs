@@ -20,24 +20,11 @@ namespace PurchDep.UI.Mvc.Controllers
         }
         public IActionResult Index()
         {
+            var products = CreateModel(_productService.GetAll());
 
-            IndexNamedEntityModel products = new IndexNamedEntityModel()
-            {
-                NamedEntityName = "Products",
-            };
-            products.Items = _productService.GetAll();
+            var suppliers = CreateModel(_supplierService.GetAll());
 
-            IndexNamedEntityModel suppliers = new IndexNamedEntityModel()
-            {
-                NamedEntityName = "Suppliers",
-            };
-            suppliers.Items = _supplierService.GetAll();
-
-            IndexNamedEntityModel stocks = new IndexNamedEntityModel()
-            {
-                NamedEntityName = "Stocks",
-            };
-            stocks.Items = _stockService.GetAll();
+            var stocks = CreateModel(_stockService.GetAll());
 
             var model = CreateListModel(products, suppliers, stocks);
 
@@ -56,7 +43,30 @@ namespace PurchDep.UI.Mvc.Controllers
             model.Items = list;
 
             return model;
+        }
 
+        private IndexNamedEntityModel CreateModel(IEnumerable<INamedEntity> items)
+        {
+            var model = new IndexNamedEntityModel();
+
+            switch (items)
+            {
+                case IEnumerable<Product>:
+                    model.NamedEntityName = "Products";
+                    break;
+                case IEnumerable<Supplier>:
+                    model.NamedEntityName = "Suppliers";
+                    break;
+                case IEnumerable<Stock>:
+                    model.NamedEntityName = "Stocks";
+                    break;
+                default:
+                    model.NamedEntityName = "Unknown Type";
+                    break;
+            }
+            model.Items = items;
+
+            return model;
         }
     }
 }
