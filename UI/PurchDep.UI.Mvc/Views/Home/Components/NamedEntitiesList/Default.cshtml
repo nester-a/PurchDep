@@ -1,0 +1,10 @@
+﻿@model IndexNamedEntityModel
+
+<div class="index-products-list">
+    <h2>@Model!.NamedEntityName</h2>
+    
+    @foreach (var item in Model!.Items!)
+    {
+        <p>@item.Name</p>
+    }
+</div>

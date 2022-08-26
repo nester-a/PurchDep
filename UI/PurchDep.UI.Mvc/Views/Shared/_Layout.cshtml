@@ -4,10 +4,11 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+    <partial name="Partial/_Styles"/>
 </head>
 <body>
-    <div>
-        <partial name="Partial/_MainMenu"/>
+    <partial name="Partial/_MainMenu"/>
+    <div class="page-content">
         @RenderBody()
     </div>
 </body>
