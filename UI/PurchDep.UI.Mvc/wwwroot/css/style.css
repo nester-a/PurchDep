@@ -16,8 +16,9 @@
     text-decoration: none;
 }
 .main-menu {
-    position: relative;
+    /*position: relative;*/
     background-color: gray;
+    /*display: flex;*/
 }
 .main-menu-item {
     text-align: center;
@@ -41,7 +42,34 @@
     bottom: 0;
     left: 0;
     margin: auto;
+    justify-content: center;
 }
 /* MENU STYLES ENDS*/
 
+/*HOME PAGE CONTENT STYLES*/
+.content,
+.content-item,
+.items-list{
+    border: 1px solid black;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
 
+.content{
+    height:auto;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+}
+
+.content-item{
+    width: 200px;
+    text-align:center;
+    align-items: center;
+}
+
+.items-list{
+    width: 100px;
+    margin: auto;
+}
+/*HOME PAGE CONTENT STYLES ENDS*/
