@@ -16,7 +16,7 @@ namespace PurchDep.Interfaces.Mapping
                 Name = item.Product.Name,
                 Quantity = item.Quantity,
                 SupplierId = item.SupplierId,
-                SuppliersPrice = currentSuppliersProduct!.Price,
+                SuppliersPrice = currentSuppliersProduct is null ? 0 : currentSuppliersProduct.Price,
                 StockId = item.StockId,
             };
 
