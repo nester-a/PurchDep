@@ -1,0 +1,48 @@
+﻿@model PurchDep.Domain.Supplier
+
+<section>
+    <h1 class="content-heading">Supplier Details</h1>
+    <ul>
+        <li><p>Id : @Model!.Id</p></li>
+        <li><p>Name : @Model!.Name</p></li>
+    </ul>
+    <a asp-action="Update" asp-route-id="@Model!.Id">Update</a>
+    <a asp-action="Delete" asp-route-id="@Model!.Id">Delete</a>
+    <h2>Suppliers Products</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Suppliers Price</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+           @foreach(var product in Model.SuppliersProducts)
+           {
+               <tr>
+                   <td>
+                       <a asp-controller="Products" asp-action="Details" asp-route-id="@product.Id">
+                           @product.Id
+                       </a>
+                   </td>
+                   <td>@product.Name</td>
+                   <td>@product.SuppliersPrice</td>
+                   <td>
+                       <a asp-action="UpdateProduct" asp-route-supplierId="@Model!.Id" asp-route-productId="@product.Id">
+                           <input type="submit" value="Update"/>
+                       </a>
+                   </td>
+                   <td>
+                       <form asp-action="RemoveProduct" asp-route-supplierId="@Model!.Id" asp-route-productId="@product.Id">
+                           <input type="submit" value="Delete" formmethod="post"/>
+                       </form>
+                   </td>
+               </tr>
+           }
+        </tbody>
+    </table>
+    <a asp-action="AddProduct" asp-route-id="@Model!.Id">Add New Suppliers Product</a>
+</section>
+

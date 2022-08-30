@@ -1,0 +1,12 @@
+﻿@model IndexNamedEnitiesListModel
+<section>
+    <h1 class="content-heading">Main Page</h1>
+    <div class="content">
+        @foreach (var item in Model!.Items!)
+        {
+            <div class="content-item">
+                @await Component.InvokeAsync("NamedEntitiesList", new { namedEnityModel = item })
+            </div>
+        }
+    </div>
+</section>

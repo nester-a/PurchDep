@@ -1,0 +1,12 @@
+﻿@model PurchDep.Domain.Product
+
+<section>
+    <h1 class="content-heading">Product Details</h1>
+    <ul>
+        <li><p>Id : @Model!.Id</p></li>
+        <li><p>Name : @Model!.Name</p></li>
+    </ul>
+    <a asp-action="Update" asp-route-id="@Model!.Id">Update</a>
+    <a asp-action="Delete" asp-route-id="@Model!.Id">Delete</a>
+</section>
+

@@ -1,0 +1,14 @@
+﻿@model ICollection<PurchDep.Domain.Product>
+
+<section>
+    <h1 class="content-heading">Products List</h1>
+    <ul>
+        @foreach (var product in Model!)
+        {
+            <li>
+                <a asp-action="Details" asp-route-id="@product.Id">@product.Name</a>
+            </li>
+        }
+    </ul>
+    <a asp-action="Create">Add new product</a>
+</section>

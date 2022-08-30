@@ -1,0 +1,66 @@
+﻿@model AddSupplierProductModel
+@inject IService<Product> service
+
+<h4>Add Suppliers Product</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddProduct">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input type="checkbox" id="new-product" class="form-check-input" asp-for="NewProduct"/> @Html.DisplayNameFor(model => model.NewProduct)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="NewProductName" class="control-label"></label>
+                <input asp-for="NewProductName" class="form-control" id="new-product-name"/>
+                <span asp-validation-for="NewProductName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select asp-for="ProductId" id="old-product">
+                    <option>(chose one)</option>
+                    @foreach (var item in service.GetAll())
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="SupplierId" class="control-label" hidden></label>
+                <input asp-for="SupplierId" class="form-control" hidden/>
+                <span asp-validation-for="SupplierId" class="text-danger" hidden></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+<script>
+        var update_select = function () {
+            if ($('#new-product').is(':checked')) {
+                $('#old-product').prop('disabled', 'disabled');
+                $('#new-product-name').prop('disabled', false);
+            }
+            else {
+                $('#old-product').prop('disabled', false);
+                $('#new-product-name').prop('disabled', 'disabled');
+            }
+        }
+        $(update_select);
+        $('#new-product').change(update_select);
+</script>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

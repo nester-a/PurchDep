@@ -1,0 +1,19 @@
+﻿@model IndexNamedEntityModel
+@{
+    int i = 0;
+}
+
+<div>
+    <h2>@Model!.NamedEntityName</h2>
+    <div class="items-list">
+        @foreach (var item in Model!.Items!)
+        {
+            <p>@item.Name</p>
+            i++;
+            @if (i > 4) break;
+        }
+    </div>
+    <div class="items-list-button">
+        <a class="items-list-button-href" asp-controller="@Model!.NamedEntityName" asp-action="Index">SHOW MORE</a>
+    </div>
+</div>
