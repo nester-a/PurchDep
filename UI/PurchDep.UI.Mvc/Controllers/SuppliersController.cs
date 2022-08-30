@@ -57,7 +57,12 @@ namespace PurchDep.UI.Mvc.Controllers
         {
             var item = model;
             if (item.Id == 0) _supplierService.Add(item);
-            else _supplierService.Update(item.Id, item);
+            else
+            {
+                var supplier = _supplierService.Get(item.Id);
+                supplier.Name = item.Name;
+                _supplierService.Update(item.Id, supplier);
+            }
 
             return RedirectToAction(nameof(Index));
         }
@@ -72,12 +77,12 @@ namespace PurchDep.UI.Mvc.Controllers
         public IActionResult AddProduct(AddSupplierProductModel model)
         {
             if (model is null) throw new ArgumentNullException();
-            var supplier = _supplierService.Get(model.SupplierId);
+            var supplier = _supplierService.Get((int)model.SupplierId!);
             if (model.NewProduct)
             {
                 var productDom = new Product()
                 {
-                    Name = model.NewProductName,
+                    Name = model.NewProductName!,
                 };
                 var res = _productService.Add(productDom);
 
@@ -85,7 +90,7 @@ namespace PurchDep.UI.Mvc.Controllers
                 {
                     Id = res.Id,
                     Name = res.Name,
-                    SupplierId = model.SupplierId,
+                    SupplierId = (int)model.SupplierId,
                     SuppliersPrice = model.Price,
                 };
                 supplier.SuppliersProducts.Add(supProduct);
@@ -97,7 +102,7 @@ namespace PurchDep.UI.Mvc.Controllers
                 {
                     Id = productDom.Id,
                     Name = productDom.Name,
-                    SupplierId = model.SupplierId,
+                    SupplierId = (int)model.SupplierId,
                     SuppliersPrice = model.Price,
                 };
                 supplier.SuppliersProducts.Add(supProduct);
