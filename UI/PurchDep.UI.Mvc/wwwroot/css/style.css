@@ -16,9 +16,7 @@
     text-decoration: none;
 }
 .main-menu {
-    /*position: relative;*/
     background-color: gray;
-    /*display: flex;*/
 }
 .main-menu-item {
     text-align: center;
